@@ -1,0 +1,105 @@
+.container {
+  max-width: 1660px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.page {
+  position: relative;
+  display: grid;
+  grid-template: auto / 300px 1fr 300px;
+  grid-template-areas: "header main footer" "header main footer" "header main footer" "header reg footer" "header log footer";
+  gap: 50px;
+  background-color: rgba(139, 7, 139, .5);
+  font-family: 'TTFirsNeue';
+  // height: 100%;
+}
+
+main {
+  flex: 1 1 auto;
+  grid-area: main;
+  background-color: rgba(255,255,255,.3);
+}
+
+@media (max-width: 1400px) {
+  .page {
+    grid-template-areas: "header main footer" "header main footer" "header main footer" "reg reg reg" "log log log";
+  }
+}
+
+@media (max-width: 1024px) {
+  .page {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main" "reg" "log" "footer";
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    &__link {
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+  .game {
+    &__link {
+      &:hover {
+        border-color: #fff;
+      }
+    }
+  }
+  .reg {
+    &__input {  
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    &__btn {
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    &__close  {
+      &:hover {
+        border-color: #fff;
+      }
+    }
+  }
+  .log {
+    &__input {  
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    &__btn {
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    &__close  {
+      &:hover {
+        border-color: #fff;
+      }
+    }
+  }
+  .footer {
+    &__link {
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}
