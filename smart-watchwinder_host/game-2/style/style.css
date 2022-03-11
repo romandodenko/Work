@@ -1,0 +1,245 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  user-select: none;
+  cursor: pointer;
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+.container .title {
+  font-family: "Fredoka One", cursive;
+  font-size: 3rem;
+  color: white;
+}
+.container .money-container {
+  position: relative;
+  margin-bottom: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+.container .money-container .changes {
+  position: absolute;
+  display: inline-flex;
+  top: 1rem;
+  font-weight: bold;
+}
+.container .money-container .changes .change {
+  color: #00FF00;
+  padding-left: 0.5rem;
+  animation-duration: 1s;
+  animation-name: slideinLeft;
+  animation-fill-mode: forwards;
+}
+.container .money-container .changes .change.negative {
+  color: #FF0000;
+}
+.container .money-container .changes .change:nth-child(1) {
+  opacity: 0.85;
+}
+.container .money-container .changes .change:nth-child(2) {
+  opacity: 0.7;
+}
+.container .money-container .changes .change:nth-child(3) {
+  opacity: 0.55;
+}
+.container .money-container .changes .change:nth-child(4) {
+  opacity: 0.4;
+}
+.container .money-container .changes .change:nth-child(5) {
+  opacity: 0.25;
+}
+.container .money-container .changes .change:nth-child(6) {
+  opacity: 0.1;
+}
+.container .money-container .changes .change:nth-child(7) {
+  opacity: -0.05;
+}
+.container .money-container .changes .change:nth-child(8) {
+  opacity: -0.2;
+}
+.container .money-container #money {
+  font-size: 2rem;
+  display: inline;
+  margin-left: -15.5rem;
+  font-weight: bold;
+}
+.container .money-container #money:before {
+  content: "💰 ";
+}
+.container .play-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 320px;
+  /* background-image: linear-gradient(45deg, #edfaf9 18.75%, #b3d5eb 18.75%, #b3d5eb 50%, #edfaf9 50%, #edfaf9 68.75%, #b3d5eb 68.75%, #b3d5eb 100%); */
+  background-size: 56.57px 56.57px;
+  min-height: 12.5rem;
+  border: solid #1e1e1e 5px;
+  margin: 0 auto;
+}
+.container .play-area .reel-container {
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 12.5rem;
+  overflow: hidden;
+  align-items: center;
+  width: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.container .play-area .reel-container:first-child {
+  border-right: solid #1e1e1e 3px;
+}
+.container .play-area .reel-container:last-child {
+  border-left: solid #1e1e1e 3px;
+}
+.container .play-area .reel-container .reel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 3px;
+  font-size: 3rem;
+  animation-duration: 0.1s;
+  animation-name: slidein;
+}
+.reel-item img {
+  display: block;
+}
+.container .play-area .reel-container .reel-item.deactivate {
+  animation-duration: 0.1s;
+  animation-name: slideOut;
+  animation-fill-mode: forwards;
+}
+.container .play-area .reel-container .reel-item.win {
+  animation: winFlashReels 1s infinite;
+  border-radius: 30%;
+}
+.container .play-area:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 0;
+  top: calc(50% - 8px);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #1e1e1e;
+}
+.container .play-area:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  right: 0;
+  top: calc(50% - 8px);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 15px solid #1e1e1e;
+}
+.container .info {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+.instructions {
+  color: white;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Fredoka One", cursive;
+}
+.info-text {
+  color: white;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Fredoka One", cursive;
+}
+.container .info .prize-table {
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3rem;
+}
+.prize-table img {
+  width: 23px;
+  height: 23px;
+}
+.container .info .prize-table .doubles {
+  padding-right: 2rem;
+}
+.container .info .prize-table .prize-item {
+  opacity: 1;
+  margin-bottom: 0.2rem;
+}
+.container .info .prize-table .prize-item.active {
+  opacity: 1;
+  animation: winFlashPrizeTable 1s infinite;
+}
+@keyframes slidein {
+  from {
+    font-size: 0.1rem;
+    opacity: 0;
+  }
+  to {
+    font-size: 3rem;
+    opacity: 1;
+  }
+}
+@keyframes slideOut {
+  to {
+    height: 0;
+    font-size: 0.1rem;
+    opacity: 0;
+  }
+  from {
+    height: 3rem;
+    font-size: 3rem;
+    opacity: 1;
+  }
+}
+@keyframes winFlashReels {
+  0% {
+    background-color: rgba(240, 240, 240, 0.2);
+  }
+  50% {
+    background-color: #4B0082;
+  }
+  100% {
+    background-color: rgba(240, 240, 240, 0.2);
+  }
+}
+@keyframes winFlashPrizeTable {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+@keyframes slideinLeft {
+  to {
+    font-size: 1rem;
+  }
+  from {
+    font-size: 0rem;
+  }
+}

@@ -1,0 +1,338 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1060;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+   font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+ }
+ }
+
+.header {
+  position: relative;
+  @include adaptive ("padding-top", 25, 15, 0);
+  @include adaptive ("padding-bottom", 25, 15, 0);
+  z-index: 10;
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__nav {
+    flex-grow: 1;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  &__item:not(:last-child) {
+    margin-right: 25px;
+  }
+  &__link {
+    display: inline-block;
+    @include adaptiv-font(24, 20);
+    line-height: 32px;
+    font-weight: 400;
+    color: #fff;
+    transition: all .2s ease-in-out;
+  }
+  &__buttons {
+    display: flex;
+  }
+
+  &__sign {
+    position: relative;
+    margin-right: 20px;
+  }
+
+  &__log {
+    position: relative;
+  }
+}
+.profile {
+  display: none;
+  position: relative;
+  &__btn {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+    padding: 15px 30px;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    transition: all .2s ease-in-out;
+    background-color: #fbd784;
+  }
+  &__body {
+    position: absolute;
+    width: 300px;
+    top: 130%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all .2s ease-in-out;
+  }
+  &__name {
+    @include adaptiv-font(20, 16);
+    line-height: 32px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  &__email {
+    @include adaptiv-font(20, 16);
+    line-height: 32px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  &__exit {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 10px 15px;
+    background-color: #228b22;
+    transition: all .2s ease-out;
+  }
+}
+.sign {
+  &__but {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+    padding: 15px 30px;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    transition: all .2s ease-in-out;
+    background-color: #fbd784;
+  }
+
+  &__body {
+    position: absolute;
+    width: 140%;
+    top: 130%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all .2s ease-in-out;
+  }
+
+  &__form {
+    width: 100%;
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+    padding: 0 10px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: all .2s ease-in-out;
+    &::placeholder {
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 400;
+      color: #fff;
+      padding: 5px 0;
+    }
+    &:focus-visible {
+      border-color: #fbd784;
+    }
+  }
+
+  &__btn {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 10px 15px;
+    background-color: #228b22;
+    transition: all .2s ease-out;
+    cursor: pointer;
+  }
+}
+.log {
+
+  &__but {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+    padding: 15px 30px;
+    border: 1px solid transparent;
+    background-color: #fbd784;
+    border-radius: 100px;
+    transition: all .2s ease-in-out;
+  }
+
+  &__body {
+    position: absolute;
+    width: 140%;
+    top: 130%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all .2s ease-in-out;
+  }
+
+  &__form {
+    width: 100%;
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+    padding: 0 10px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: all .2s ease-in-out;
+    &::placeholder {
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 400;
+      color: #fff;
+      padding: 5px 0;
+    }
+    &:focus-visible {
+      border-color: #fbd784;
+    }
+  }
+
+  &__btn {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 10px 15px;
+    background-color: #228b22;
+    transition: all .2s ease-out;
+    cursor: pointer;
+  }
+}
+
+.profile-body-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.sign-form-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.log-form-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+@media (max-width: 768px) {
+  .header {
+    &__container {
+      flex-direction: column;
+    }
+    &__nav {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    &__list {
+      justify-content: center;
+    }
+  }
+  .profile {
+    &__btn {
+      @include adaptiv-font(20, 16);
+      @include adaptive ("padding-top", 15, 10, 0);
+      @include adaptive ("padding-bottom", 15, 10, 0);
+      @include adaptive ("padding-right", 30, 14, 0);
+      @include adaptive ("padding-left", 30, 14, 0);
+    }
+    &__body {
+      left: -114px;
+      right: auto;
+    }
+  }
+  .sign {
+    &__but {
+      @include adaptiv-font(20, 16);
+      @include adaptive ("padding-top", 15, 10, 0);
+      @include adaptive ("padding-bottom", 15, 10, 0);
+      @include adaptive ("padding-right", 30, 14, 0);
+      @include adaptive ("padding-left", 30, 14, 0);
+    }
+    &__body {
+      width: 300px;
+      left: -30px
+    }
+  }
+  .log {
+    &__but {
+      @include adaptiv-font(20, 16);
+      @include adaptive ("padding-top", 15, 10, 0);
+      @include adaptive ("padding-bottom", 15, 10, 0);
+      @include adaptive ("padding-right", 30, 15, 0);
+      @include adaptive ("padding-left", 30, 15, 0);
+    }
+    &__body {
+      width: 300px;
+      right: -30px;
+    }
+  }
+}
