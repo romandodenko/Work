@@ -1,0 +1,241 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1320;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+
+.header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #BDB76B;
+
+  @media (max-width: 600px) {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 600px) {
+      position: relative;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+  }
+
+  &__reg {
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 26, 24, 0);
+    font-weight: 400;
+    color: var(--white);
+    @include adaptive ("padding-top", 10, 5, 0);
+    @include adaptive ("padding-bottom", 10, 5, 0);
+    @include adaptive ("padding-left", 35, 5, 0);
+    @include adaptive ("padding-right", 35, 5, 0);
+    background-color: #808000;
+    border-radius: 100px;
+    margin-right: 25px;
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out;
+
+    &:active {
+      transform: rotate(-5deg);
+      background-color: transparent;
+    }
+
+    @media (max-width: 600px) {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__wrapper-logo {
+    position: relative;
+    margin-right: 25px;
+    padding: 30px;
+    border-radius: 120px;
+    background-color: #808000;
+    margin-bottom: -100px;
+    z-index: 2;
+
+    @media (max-width: 600px) {
+      position: absolute;
+      left: 15px;
+      top: -10px;
+      padding: 15px 20px;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include adaptiv-font(38, 16);
+    @include adaptive ("line-height", 48, 26, 0);
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    font-family: 'Margarine';
+    transition: transform .2s ease-in-out, color .2s ease-in-out;
+
+    &:active {
+      color: var(--hover);
+      transform: translateY(3px);
+    }
+  }
+
+  &__pursuit {
+    display: inline-block;
+    text-shadow: 2px 2px 20px #FFDAB9;
+    animation-name: box-shadow;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  &__of {
+    display: inline-block;
+    text-shadow: 2px 2px 20px #FFDAB9;
+    animation-name: box-shadow;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  &__clarity {
+    display: inline-block;
+    text-shadow: 2px 2px 20px #FFDAB9;
+    animation-name: box-shadow;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  &__log {
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 26, 24, 0);
+    font-weight: 400;
+    color: var(--white);
+    @include adaptive ("padding-top", 10, 5, 0);
+    @include adaptive ("padding-bottom", 10, 5, 0);
+    @include adaptive ("padding-left", 35, 5, 0);
+    @include adaptive ("padding-right", 35, 5, 0);
+    background-color: #808000;
+    border-radius: 100px;
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out;
+
+    &:active {
+      transform: rotate(5deg);
+      background-color: transparent;
+    }
+  }
+
+  &__text {
+    @media (max-width: 600px) {
+      order: 1;
+    }
+  }
+}
+
+@keyframes box-shadow {
+  0% {
+    text-shadow: 2px 2px 20px #FFDAB9;
+  }
+
+  50% {
+    text-shadow: 2px 2px 20px #6A5ACD;
+  }
+
+  100% {
+    text-shadow: 2px 2px 20px #FFDAB9;
+  }
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+
+  @media (max-width: 600px) {
+    order: 2;
+    margin-right: 0;
+    flex-direction: column;
+  }
+
+  &__text {
+    max-width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    @media (max-width: 600px) {
+      order: 1;
+    }
+  }
+
+  &__btn {
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+    margin-right: 20px;
+    background-color: transparent;
+    border: 1px solid var(--white);
+    align-self: center;
+    padding: 3px 6px 4px 7px;
+    margin-top: 5px;
+    transition: border-color .2s ease-in-out, color .2s ease-in-out, transform .2s ease-in-out;
+
+    &:active {
+      color: var(--active);
+      border-color: var(--active);
+      transition-duration: .1s;
+    }
+
+    @media (max-width: 600px) {
+      order: 2;
+    }
+  }
+}

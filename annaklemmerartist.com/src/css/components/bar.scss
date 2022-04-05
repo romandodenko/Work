@@ -1,0 +1,300 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1320;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+ $addSize: $pcSize - $mobSize;
+ $addMobSize: $addSize + $addSize * 0.7;
+ @media (max-width: 767px) {
+   font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+ }
+ @media (min-width: 767px) {
+  font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+}
+}
+
+.bar {
+  @include adaptive ("padding-top", 50, 25, 0);
+  @include adaptive ("padding-bottom", 100, 50, 0);
+
+  &__wrapper-title {
+    display: flex;
+    justify-content: center;
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+
+  &__title {
+    position: relative;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    color: var(--black);
+    &::before {
+      content: "";
+      position: absolute;
+      @include adaptive ("top", 25, 21, 0);
+      left: 0;
+      width: 80px;
+      height: 2px;
+      background-color: var(--black);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      @include adaptive ("top", 25, 21, 0);
+      right: 0;
+      width: 80px;
+      height: 2px;
+      background-color: var(--black);
+    }
+    @media (max-width: 400px) {
+      &::before {
+        width: 40px;
+      }
+      &::after {
+        width: 40px;
+      }
+    }
+  }
+
+  &__span {
+    @include adaptiv-font(30, 26);
+    @include adaptive ("line-height", 40, 36, 0);
+    text-transform: lowercase;
+  }
+
+  &__item {
+    display: grid;
+    grid-template: auto / .7fr 1fr;
+    gap: 80px 30px;
+    grid-template-areas: "swiper descr" "rec rec";
+    box-shadow: 2px 2px 30px var(--black);
+    padding: 30px 15px;
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "swiper" "descr" "rec";
+      gap: 30px;
+    }
+  }
+
+  &__item:not(:last-child) {
+    @include adaptive ("margin-bottom", 100, 50, 0);
+  }
+
+  &__descr {
+    grid-area: descr;
+  }
+
+  &__subtitle {
+    @include adaptiv-font(26, 18);
+    @include adaptive ("line-height", 36, 28, 0);
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  &__country {
+    display: inline-flex;
+    flex-direction: column;
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 28, 24, 0);
+    font-style: normal;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 30px
+  }
+
+  &__text {
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 28, 24, 0);
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 30px;
+  }
+
+  &__link {
+    display: inline-block;
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 28, 24, 0);
+    font-weight: 400;
+    color: var(--black);
+    @include adaptive ("padding-top", 15, 7, 0);
+    @include adaptive ("padding-bottom", 15, 7, 0);
+    @include adaptive ("padding-left", 35, 15, 0);
+    @include adaptive ("padding-right", 35, 15, 0);
+    border: 2px solid var(--black);
+    margin-bottom: 30px;
+    transition: border-color .2s ease-in-out;
+    &:active {
+      border-color: var(--active);
+    }
+  }
+}
+
+.bar-swiper {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  grid-area: swiper;
+  padding-bottom: 50px;
+  @media (max-width: 900px) {
+    height: 350px;
+  }
+  &__slide {
+    & img {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+    }
+  }
+
+  &__link {
+    position: relative;
+    display: block  ;
+    height: 100%;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.5);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+  }
+
+  &__span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include adaptiv-font(20, 16);
+    color: var(--black);
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    text-transform: uppercase;
+    transition: opacity .2s ease-in-out;
+  }
+
+  &__buttons {
+    padding: 10px 0 0 0;
+    text-align: center;
+  }
+
+  &__prev {
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    color: var(--black);
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 2px solid var(--black);
+    margin-right: 15px;
+    transition: opacity .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+    &:active {
+      opacity: .5;
+    }
+  }
+
+  &__next {
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    color: var(--black);
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 2px solid var(--black);
+    transition: opacity .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+    &:active {
+      opacity: .5;
+    }
+  }
+}
+
+.rec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: rec;
+  &__body {
+    display: flex;
+    align-items: center;
+    width: 26%;
+    text-align: center;
+    border: 3px solid var(--black);
+    padding: 10px;
+    @media (max-width: 980px) {
+      width: 50%;
+      justify-content: center;
+    }
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+  &__image {
+    margin-right: 10px;
+  }
+  &__text {
+    @include adaptiv-font(16, 12);
+    @include adaptive ("line-height", 26, 22, 0);
+    font-weight: 400;
+    color: var(--black);
+    padding-right: 26px;
+    @media (max-width: 980px) {
+      padding-right: 0;
+    }
+  }
+}
+.sublist {
+  display: grid;
+  grid-template: auto / repeat(3,1fr);
+  gap: 30px;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+  &__item {
+    position: relative;
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 28, 24, 0);
+    font-weight: 400;
+    color: var(--black);
+    padding-left: 20px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      background-color: rgba(0, 128, 0,.3);
+      z-index: -1;
+    }
+  }
+}
+
+.swiper-button-disabled {
+  opacity: .5;
+}

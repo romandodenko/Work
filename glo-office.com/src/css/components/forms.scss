@@ -1,0 +1,256 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1260;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+
+.reg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.9);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__wrapper-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 860px;
+    padding: 60px 30px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__label:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__input {
+    height: 60px;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 26, 24, 0);
+    font-weight: 400;
+    font-family: "Margarine";
+    color: var(--color);
+    border: 2px solid var(--color);
+    border-radius: 15px;
+    padding: 0 15px;
+    background-color: transparent;
+    transition: border-color .2s ease-in-out;
+    &::placeholder {
+      @include adaptiv-font(16, 14);
+      @include adaptive ("line-height", 26, 24, 0);
+      font-weight: 400;
+      font-family: "Margarine";
+      color: var(--color);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+    &:focus-visible {
+      border-color: var(--active);
+    }
+  }
+
+  &__input:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__exit {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    @include adaptiv-font(20, 16);
+    line-height: 1;
+    font-family: "Margarine";
+    color: var(--color);
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+    &:active {
+      color: var(--active);
+    }
+  }
+
+  &__btn {
+    background-color: transparent;
+    align-self: flex-start;
+    border: 2px solid var(--color);
+    border-radius: 10px 0 10px 0;
+    font-family: "Margarine";
+    color: var(--color);
+    padding: 10px;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out;
+    cursor: pointer;
+
+    &:active {
+      border-color: var(--active);
+      color: var(--active);
+    }
+  }
+}
+
+.log {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.9);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__wrapper-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 860px;
+    padding: 60px 30px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__label:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__input {
+    height: 60px;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 26, 24, 0);
+    font-weight: 400;
+    font-family: "Margarine";
+    color: var(--color);
+    border: 2px solid var(--color);
+    border-radius: 15px;
+    padding: 0 15px;
+    background-color: transparent;
+    transition: border-color .2s ease-in-out;
+    &::placeholder {
+      @include adaptiv-font(16, 14);
+      @include adaptive ("line-height", 26, 24, 0);
+      font-weight: 400;
+      font-family: "Margarine";
+      color: var(--color);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+    &:focus-visible {
+      border-color: var(--active);
+    }
+  }
+
+  &__input:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__exit {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    @include adaptiv-font(20, 16);
+    line-height: 1;
+    font-family: "Margarine";
+    color: var(--color);
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+    &:active {
+      color: var(--active);
+    }
+  }
+
+  &__btn {
+    background-color: transparent;
+    align-self: flex-start;
+    border: 2px solid var(--color);
+    border-radius: 10px 0 10px 0;
+    font-family: "Margarine";
+    padding: 10px;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out;
+    cursor: pointer;
+
+    &:active {
+      border-color: var(--active);
+      color: var(--active);
+    }
+  }
+}
+
+.reg-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.log-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

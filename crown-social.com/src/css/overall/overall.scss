@@ -1,0 +1,171 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #daa520;
+  --active: #b8860b;
+}
+
+.container {
+  max-width: 1260px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: 'OpenSans';
+  background-color: var(--black);
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__top {
+    order: 1;
+    background-color: var(--white);
+    margin-bottom: 100px;
+  }
+  &__bottom {
+    margin-top: 100px;
+    order: 3;
+    background-color: var(--white);
+  }
+  @media (max-width: 1024px) {
+    &__top {
+      order: 2;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content .header {
+  order: 1;
+  @media (max-width: 1024px) {
+    border-bottom: 1px solid var(--white);
+  }
+}
+
+.content .footer {
+  order: 3;
+  background-color: var(--white);
+  @media (max-width: 1024px) {
+    border-bottom: 1px solid var(--white);
+  }
+}
+
+main {
+  flex: 1 1 auto;
+  order: 2;
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    &__logo {
+      &:hover {
+        color: var(--hover);
+        &::before {
+          border-color: var(--hover);
+          transform: translate(-2px, -2px);
+        }
+        &::after {
+          border-color: var(--hover);
+          transform: translate(2px, 2px);
+        }
+      }
+    }
+    &__link {
+      &:hover {
+        color: var(--hover);
+      }
+    }
+    &__btn {
+      &:hover {
+        color: var(--hover);
+      }
+    }
+  }
+  .game-swiper {
+    &__link {
+      &:hover {
+        opacity: .5;
+      }
+    }
+    &__prev {
+      &:hover {
+        opacity: .5;
+      }
+    }
+    &__next {
+      &:hover {
+        opacity: .5;
+      }
+    }
+  }
+  .cockie {
+    & a {
+      &:hover {
+        color: var(--white);
+      }
+    }
+  }
+  .reg {
+    &__input {
+      &:hover {
+        border-color: var(--hover);
+      }
+    }
+    &__exit {
+      &:hover {
+        color: var(--hover);
+        border-color: var(--hover);
+      }
+    }
+    &__btn {
+      &:hover {
+        color: var(--white);
+        background-color: transparent;
+      }
+    }
+  }
+  .log {
+    &__input {
+      &:hover {
+        border-color: var(--hover);
+      }
+    }
+    &__exit {
+      &:hover {
+        color: var(--hover);
+        border-color: var(--hover);
+      }
+    }
+    &__btn {
+      &:hover {
+        color: var(--white);
+        background-color: transparent;
+      }
+    }
+  }
+  .footer {
+    &__link {
+      &:hover {
+        color: var(--hover);
+      }
+    }
+  }
+}

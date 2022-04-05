@@ -1,0 +1,142 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1360;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #D3D3D3;
+  --active: #696969;
+}
+
+.container {
+  max-width: 1320px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat';
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.title {
+  @include adaptiv-font(38, 28);
+  @include adaptive ("line-height", 48, 38, 0);
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.subtitle {
+  @include adaptiv-font(32, 24);
+  @include adaptive ("line-height", 42, 34, 0);
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.text {
+  @include adaptiv-font(20, 16);
+  @include adaptive ("line-height", 30, 26, 0);
+  font-weight: 400;
+  color: var(--black);
+  text-align: center;
+}
+
+.link {
+  @include adaptiv-font(20, 16);
+  @include adaptive ("line-height", 30, 26, 0);
+  font-weight: 400;
+  color: var(--black);
+}
+.body-block {
+  overflow: hidden;
+}
+
+.site-bg__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__logo {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .books__link {
+    &:hover {
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+  .books__item {
+    &:hover {
+      transform: translateY(5px);
+    }
+  }
+  .book__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .book__read {
+    &:hover {
+      opacity: .7;
+    }
+  }
+  .footer__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+}

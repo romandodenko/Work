@@ -1,0 +1,484 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1320;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.header {
+  position: relative;
+  z-index: 5;
+  @include adaptive ("padding-top", 25, 10, 0);
+  @include adaptive ("padding-bottom", 25, 10, 0);
+  background-color: rgba(0, 0, 0, .5);
+
+  &__container {}
+
+  &__wrapper-logo {
+    text-align: center;
+  }
+
+  &__logo {
+    display: inline-block;
+    @include adaptiv-font(38, 22);
+    @include adaptive ("line-height", 48, 32, 0);
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    transition: color .2s ease-in-out, transform .2s ease-in-out;
+
+    &:active {
+      color: var(--active);
+      transform: scale(1.1);
+    }
+  }
+
+  &__top {
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+
+  &__nav {
+    @media (max-width: 768px) {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, .9);
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+
+  &__item:not(:last-child) {
+    @include adaptive ("margin-right", 25, 15, 0);
+
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    transition: transform .2s ease-in-out, color .2s ease-in-out;
+
+    &:active {
+      color: var(--active);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+
+  &__buttons {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.reg {
+
+  &__button {
+    @include adaptiv-font(20, 14);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--text);
+    @include adaptive ("padding-top", 15, 8, 0);
+    @include adaptive ("padding-bottom", 15, 8, 0);
+    @include adaptive ("padding-right", 35, 12, 0);
+    @include adaptive ("padding-left", 35, 12, 0);
+    background-color: #a0522d;
+    border-radius: 0 0 15px 15px;
+    transition: transform .2s ease-in-out, border-radius .3s ease-in-out;
+    @include adaptive ("margin-right", 20, 10, 0);
+
+    &:active {
+      border-radius: 15px 15px 0 0;
+      transform: translateY(3px);
+    }
+  }
+
+  &__wrapper-form {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 120%;
+    left: 0;
+    transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  }
+
+  &__label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__input {
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    height: 50px;
+    background-color: #a0522d;
+    border: 2px solid var(--white);
+    padding: 0 15px;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      @include adaptiv-font(14, 12);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--white);
+      padding: 3px 0;
+    }
+
+    &:focus-visible {
+      border-color: var(--hover);
+    }
+  }
+
+  &__input:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__btn {
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    @include adaptive ("padding-top", 10, 6, 0);
+    @include adaptive ("padding-bottom", 10, 6, 0);
+    @include adaptive ("padding-right", 20, 10, 0);
+    @include adaptive ("padding-left", 20, 10, 0);
+    background-color: #a0522d;
+    border-radius: 0 0 15px 15px;
+    transition: border-radius .3s ease-in-out;
+    cursor: pointer;
+
+    &:active {
+      border-radius: 15px 15px 0 0;
+    }
+  }
+}
+
+.log {
+
+  &__button {
+    @include adaptiv-font(20, 14);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--text);
+    @include adaptive ("padding-top", 15, 8, 0);
+    @include adaptive ("padding-bottom", 15, 8, 0);
+    @include adaptive ("padding-right", 35, 12, 0);
+    @include adaptive ("padding-left", 35, 12, 0);
+    background-color: #a0522d;
+    border-radius: 0 0 15px 15px;
+    transition: transform .2s ease-in-out, border-radius .3s ease-in-out;
+
+    &:active {
+      border-radius: 15px 15px 0 0;
+      transform: translateY(3px);
+    }
+  }
+
+  &__wrapper-form {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 120%;
+    right: 0;
+    transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  }
+
+  &__label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__input {
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    height: 50px;
+    background-color: #a0522d;
+    border: 2px solid var(--white);
+    padding: 0 15px;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      @include adaptiv-font(14, 12);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--white);
+      padding: 3px 0;
+    }
+
+    &:focus-visible {
+      border-color: var(--hover);
+    }
+  }
+
+  &__input:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__btn {
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    @include adaptive ("padding-top", 10, 6, 0);
+    @include adaptive ("padding-bottom", 10, 6, 0);
+    @include adaptive ("padding-right", 20, 10, 0);
+    @include adaptive ("padding-left", 20, 10, 0);
+    background-color: #a0522d;
+    border-radius: 0 0 15px 15px;
+    transition: border-radius .3s ease-in-out;
+    cursor: pointer;
+
+    &:active {
+      border-radius: 15px 15px 0 0;
+    }
+  }
+}
+
+.wrapper-form.is-active {
+  display: block;
+  animation-name: dropdownOpen;
+  animation-duration: 0.4s;
+}
+
+.wrapper-form.is-disabled {
+  display: block;
+  animation-name: dropdownClose;
+  animation-duration: 0.4s;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dropdownClose {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  z-index: 11;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text);
+    transform: translateY(-50%);
+    transition: all .2s ease-in-out;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text);
+    transition: transform .2s ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text);
+    transition: transform .2s ease-in-out;
+  }
+}
+
+.burger-active {
+  &::before {
+    transform: translateX(5px);
+  }
+
+  &::after {
+    transform: translateX(-5px);
+  }
+}
+
+.nav-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    order: 1;
+    margin-right: 20px;
+  }
+
+  &__text {
+    max-width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &__btn {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    @include adaptiv-font(14, 12);
+    line-height: 1;
+    font-weight: 400;
+    text-align: center;
+    margin-left: 20px;
+    background-color: transparent;
+    border: 1px solid var(--text);
+    align-self: center;
+    transition: border-color .2s ease-in-out, transform .2s ease-in-out;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text);
+      transform: rotate(45deg) translate(5px,5px);
+          transition: background-color .2s ease-in-out;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text);
+      transform: rotate(-45deg) translate(-5px,5px);
+          transition: background-color .2s ease-in-out;
+    }
+    &:active {
+      border-color: var(--active);
+      transition-duration: .1s;
+      &::before {
+        background-color: var(--active);
+        transition-duration: .1s;
+      }
+      &::after {
+        background-color: var(--active);
+        transition-duration: .1s;
+      }
+    }
+  }
+}

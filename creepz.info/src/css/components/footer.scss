@@ -1,0 +1,76 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1465;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.footer {
+  padding: 28px 0 33px 0;
+  background-color: #2c2929;
+
+  &__text {
+    @include adaptiv-font(14, 12);
+    font-weight: 400;
+    line-height: 16px;
+    color: #ffffff;
+    text-align: center;
+    @include adaptive ("margin-bottom", 52, 30, 0);
+  }
+
+  &__link {
+    @include adaptiv-font(14, 12);
+    font-weight: 400;
+    line-height: 16px;
+    color: #ffffff;
+    text-shadow: 0 1px 9px rgb(115 255 66 / 72%);
+    transition: color .2s ease-in-out;
+    @media (max-width: 1024px) {
+      &:active {
+        color: #006400;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item {
+    margin-bottom: 15px;
+  }
+
+  &__item:not(:last-child) {
+    @include adaptive ("margin-right", 83, 25, 0);
+  }
+}

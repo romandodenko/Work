@@ -1,0 +1,374 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1260;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #9932cc;
+  --active: #4b0082;
+}
+
+.container {
+  max-width: 1260px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto';
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.title {
+  @include adaptiv-font(20, 18);
+  @include adaptive ("line-height", 23, 21, 0);
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.subtitle {
+  @include adaptiv-font(18, 16);
+  @include adaptive ("line-height", 21, 19, 0);
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.text {
+  @include adaptiv-font(16, 14);
+  @include adaptive ("line-height", 25, 23, 0);
+  font-weight: 400;
+  color: var(--black);
+  text-align: center;
+}
+
+.link {
+  @include adaptiv-font(16, 14);
+  @include adaptive ("line-height", 19, 17, 0);
+  font-weight: 700;
+  color: var(--white);
+}
+.body-block {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .buttons__buttons {
+    &:hover {
+      & + .buttons__icon {
+        & svg {
+          fill: var(--hover);
+        }
+      }
+    }
+  }
+  .header__link-profile {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .buttons__sign {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .buttons__log {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .header__join {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .header__back {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .profile__link {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .profile__exit {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .hero__link {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .hero-page__link {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .game__link {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .header__logo {
+    &:hover {
+      color: var(--hover);
+      transform: translateX(47px) translateY(3px);
+      & span {
+        text-shadow: 1px 0 1px var(--black), 0 1px 1px var(--black), -1px 0 1px var(--black), 0 -1px 1px var(--black);
+      }
+    }
+  }
+  .pullout-menu__logo {
+    &:hover {
+      color: var(--hover);
+      transform: translateY(3px);
+      & span {
+        text-shadow: 1px 0 1px var(--black), 0 1px 1px var(--black), -1px 0 1px var(--black), 0 -1px 1px var(--black);
+      }
+    }
+  }
+  .pullout-menu__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .pullout-menu__log {
+    &:hover {
+      color: #3A2C63;
+      background-color: #B0E31C;
+    }
+  }
+  .pullout-menu__sign {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .pullout-menu__account-link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+  .pullout-menu__exit {
+    &:hover {
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+  .header__link {
+    &:hover {
+      color: var(--hover);
+      & span {
+        transform: translateX(3px);
+      }
+      & svg {
+        fill: var(--hover);
+      }
+    }
+  }
+  .burger {
+    &:hover {
+      & .burger__line {
+        background-color: var(--hover);
+      }
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+  .country__button {
+    &:hover {
+      &::before {
+        opacity: .4;
+      }
+    }
+  }
+  .country__link {
+    &:hover {
+      & img {
+        transform: scale(1.1);
+      }
+      & span {
+        color: var(--hover);
+      }
+    }
+  }
+  .footer__logo {
+    &:hover {
+      color: var(--hover);
+      transform: translateY(3px);
+      & span {
+        text-shadow: 1px 0 1px var(--black), 0 1px 1px var(--black), -1px 0 1px var(--black), 0 -1px 1px var(--black);
+      }
+    }
+  }
+  .footer__link {
+    &:hover {
+      color: var(--hover);
+      & span {
+        transform: translateX(3px);
+      }
+      & svg {
+        fill: var(--hover);
+      }
+    }
+  }
+  .reg__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+  .reg__btn {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .reg__exit {
+    &:hover {
+      color: var(--hover);
+      background-color: #B0E31C;
+    }
+  }
+  .reg__button {
+    &:hover {
+      color: var(--active);
+    }
+  }
+    .log__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+  .log__btn {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .log__exit {
+    &:hover {
+      color: var(--hover);
+      background-color: #B0E31C;
+    }
+  }
+  .log__button {
+    &:hover {
+      color: var(--active);
+    }
+  }
+  .email__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+  .email__btn {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .email__exit {
+    &:hover {
+      color: var(--hover);
+      background-color: #B0E31C;
+    }
+  }
+
+  .account-reg__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+  .account-reg__btn {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .account-reg__button {
+    &:hover {
+      color: var(--active);
+    }
+  }
+  .account-log__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+  .account-log__btn {
+    &:hover {
+      color: var(--white);
+      background-color: var(--hover);
+    }
+  }
+  .account-log__button {
+    &:hover {
+      color: var(--active);
+    }
+  }
+}

@@ -1,0 +1,82 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1260;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.footer {
+  @include adaptive ("padding-top", 30, 15, 0);
+  @include adaptive ("padding-bottom", 30, 15, 0);
+  background-color: var(--black);
+
+  &__ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    @media (max-width: 600px) {
+      flex-direction: column;
+     align-items: flex-start;
+    }
+  }
+
+  &__li:not(:last-child) {
+    margin-right: 20px;
+    @media (max-width: 600px) {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__link {
+    transition: color .2s ease-in-out;
+    color: var(--white);
+    &:active {
+      color: var(--active);
+    }
+  }
+
+  &__text {
+    @include adaptiv-font(16, 12);
+    @include adaptive ("line-height", 26, 22, 0);
+    font-weight: 400;
+    color: var(--white);
+  }
+}

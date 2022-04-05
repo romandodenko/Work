@@ -1,0 +1,99 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1320;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+ $addSize: $pcSize - $mobSize;
+ $addMobSize: $addSize + $addSize * 0.7;
+ @media (max-width: 767px) {
+   font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+ }
+ @media (min-width: 767px) {
+  font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+}
+}
+
+.about {
+  @include adaptive ("padding-top", 100, 50, 0);
+  @include adaptive ("padding-bottom", 50, 25, 0);
+  background-color: rgba(0, 128, 0,.3);
+  &__wrapper-title {
+    display: flex;
+    justify-content: center;
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+  &__title {
+    display: flex;
+    position: relative;
+    color: var(--white);
+    &::before {
+      content: "";
+      position: relative;
+      @include adaptive ("top", 25, 21, 0);
+      left: -10px;
+      width: 80px;
+      height: 2px;
+      background-color: #008000;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    &::after {
+      content: "";
+      position: relative;
+      @include adaptive ("top", 25, 21, 0);
+      right: -10px;
+      width: 80px;
+      height: 2px;
+      background-color: #008000;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      &::before {
+        left: -5px;
+      }
+      &::after {
+        right: -5px;
+      }
+    }
+    @media (max-width: 400px) {
+      &::before {
+        left: 0;
+        width: 40px;
+      }
+      &::after {
+        right: 0;
+        width: 40px;
+      }
+    }
+  }
+  &__text {
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 28, 24, 0);
+    font-weight: 400;
+    text-align: center;
+    color: var(--white);
+  }
+  &__text:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
