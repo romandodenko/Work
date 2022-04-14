@@ -1,0 +1,114 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1260;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.games {
+  position: relative;
+  z-index: 2;
+
+  &__container {
+    background-color: rgba(0,0,0,.4);
+    @include adaptive ("padding-top", 50, 25, 0);
+    @include adaptive ("padding-bottom", 50, 25, 0);
+  }
+
+  &__title {
+    text-align: center;
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+
+  &__list {
+    display: grid;
+    grid-template: auto  / repeat(2,1fr);
+    gap: 30px;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    border: 2px solid var(--hover);
+  }
+
+  &__image {
+    height: 350px;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__descr {
+    padding: 0 15px;
+    @include adaptive ("padding-top", 30, 15, 0);
+    @include adaptive ("padding-bottom", 30, 15, 0);
+    border-top: 2px solid var(--hover);
+  }
+
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__wrapper-link {
+    text-align: center;
+  }
+
+  &__link {
+    display: inline-block;
+    @include adaptive ("padding-top", 15, 10, 0);
+    @include adaptive ("padding-bottom", 15, 10, 0);
+    @include adaptive ("padding-left", 65, 35, 0);
+    @include adaptive ("padding-right", 65, 35, 0);
+    background-color: var(--hover);
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out, border-color .2s ease-in-out;
+    &:active {
+      border-color: var(--hover);
+      background-color: transparent;
+    }
+  }
+}
