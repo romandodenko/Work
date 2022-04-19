@@ -1,0 +1,108 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1360;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  @include adaptive ("padding-top", 20, 10, 0);
+  @include adaptive ("padding-bottom", 20, 10, 0);
+  border-top: 2px solid #ffb800;
+  background-image: url(../../img/footer-img.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__container {
+  }
+
+  &__lst {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    @media (max-width: 600px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+
+  &__itm:not(:last-child) {
+    margin-right: 20px;
+    @media (max-width: 600px) {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__link {
+    position: relative;
+    display: inline-block;
+    color: var(--white);
+    transition: color .2s ease-in-out;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--white);
+      transition: transform .2s ease-in-out;
+    }
+    &:active {
+      color: var(--active);
+      &::before {
+        transform: scale(0);
+      }
+    }
+  }
+
+  &__text {
+    @include adaptiv-font(14, 12);
+    @include adaptive ("line-height", 22, 20, 0);
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+  }
+}
