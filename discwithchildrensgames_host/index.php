@@ -11,9 +11,7 @@
 	<script src="./js/simplebar.js"></script>
 	<script src="./js/cockie.js" defer></script>
 	<title>discwithchildrensgames.com</title>
-  <?php 
-		require "./db.php";
-	?>
+
 </head>
 
 <body class="page-cockie-body">
@@ -24,7 +22,7 @@
 				This website uses cookies, click "Accept" to accept them, click "Read" to read our cookie policy.
 			</p>
 			<div class="page-cockie__bottom">
-				<a class="page-cockie__link" href="main-page.php">Accept</a>
+				<a class="page-cockie__link" href="main-page.html">Accept</a>
 				<button class="page-cockie__btn">
 					Read
 				</button>
@@ -123,10 +121,11 @@
 			</div>
 			<button class="cockie__exit"></button>
 		<div class="cockie__wrapper-link">
-			<a class="cockie__link" href="main-page.php">Accept</a>
+			<a class="cockie__link" href="main-page.html">Accept</a>
 		</div>
 		</div>
 	</div>
+	<!-- <script src="./js/cockie.js"></script> -->
 </body>
 
 </html>

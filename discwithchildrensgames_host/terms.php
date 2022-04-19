@@ -1,6 +1,36 @@
+
 <?php 
-  include 'header.php';
+include 'header.php';
 ?>
+
+    <section class="content__item">
+
+      <div class="frame"></div>
+
+      <div class="frame">
+      <div class="frame__container container">
+        <div class="frame__content welcome politicks-welcome">
+          <div class="welcome__body">
+            <div class="welcome__image">
+              <img src="./img/welcome_man.png" alt="Man">
+            </div>
+            <div class="welcome__descr">
+              <h1 class="welcome__title">Welcome to our social casino <span>discwithchildrensgames.com</span></h1>
+              <p class="welcome__text">
+                To move around the site, use the scroll
+              </p>
+              <p class="welcome__warning">
+                The Social Casino is intended only for persons over 18 years of age. Social Casino does not give you the
+                opportunity to win or earn valuable prizes or money.
+              </p>
+            </div>
+            <div class="welcome__image">
+              <img src="./img/welcome_man_2.png" alt="Man">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
 
       <div class="frame"></div>
       <div class="frame"></div>
