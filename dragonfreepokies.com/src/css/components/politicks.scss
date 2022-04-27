@@ -1,0 +1,89 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.politicks {
+  @include adaptive ("padding-top", 73, 38, 0);
+  @include adaptive ("padding-bottom", 73, 38, 0);
+  background-color: var(--black);
+  & h2 {
+    @include adaptiv-font(55, 38);
+    @include adaptive ("line-height", 59, 42, 0);
+    font-weight: 400;
+    color: var(--white);
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+
+  & h3 {
+    @include adaptiv-font(50, 33);
+    @include adaptive ("line-height", 54, 37, 0);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 30px
+  }
+
+  & p {
+    @include adaptiv-font(45, 28);
+    @include adaptive ("line-height", 49, 31, 0);
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  & p:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  & ul:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  & li {
+    @include adaptiv-font(40, 23);
+    @include adaptive ("line-height", 44, 27, 0);
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  & li:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}

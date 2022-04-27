@@ -1,0 +1,279 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1360;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.page-cockie-body {
+	height: 100%;
+}
+
+.page-cockie {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+
+	&__body {
+		position: relative;
+		left: 50%;
+		top: 50%;
+		max-width: 900px;
+		-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		padding: 30px;
+		background-color: #ffffff;
+		border-radius: 30px;
+		@media (max-width: 1024px) {
+			max-width: none;
+			width: 95%;
+		}
+	}
+
+	&__text {
+		color: var(--black);
+		margin-bottom: 10px;
+	}
+	&__link {
+		display: inline-block;
+		@include adaptiv-font(16, 14);
+		line-height: 1;
+		font-weight: 400;
+		color: var(--white);
+		@include adaptive ("padding-top", 15, 10, 0);
+		@include adaptive ("padding-bottom", 15, 10, 0);
+		@include adaptive ("padding-left", 30, 20, 0);
+		@include adaptive ("padding-right", 30, 20, 0);
+		border-radius: 15px;
+		background-color: var(--buttonBg_2);
+		-webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		-o-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		&:active {
+			color: var(--black);
+			background-color: transparent;
+		}
+	}
+	&__btn {
+		@include adaptiv-font(16, 14);
+		line-height: 1;
+		font-weight: 400;
+		color: var(--white);
+		@include adaptive ("padding-top", 15, 10, 0);
+		@include adaptive ("padding-bottom", 15, 10, 0);
+		@include adaptive ("padding-left", 30, 20, 0);
+		@include adaptive ("padding-right", 30, 20, 0);
+		border-radius: 15px;
+		margin-left: 15px;
+		background-color: var(--buttonBg_2);
+		-webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		-o-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		&:active {
+			color: var(--black);
+			background-color: transparent;
+		}
+	}
+
+}
+
+.cockie {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+	-o-transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+	transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+	&__close {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, .4);
+		z-index: 1;
+	}
+	& h1 {
+		@include adaptiv-font(26, 18);
+		@include adaptive ("line-height", 32, 24, 0);
+		font-weight: 700;
+		color: var(--black);
+		margin-bottom: 30px
+	}
+	
+	& h2 {
+		@include adaptiv-font(20, 16);
+		@include adaptive ("line-height", 28, 22, 0);
+		font-weight: 700;
+		color: var(--black);
+		margin-bottom: 30px
+	}
+	
+	& p {
+		@include adaptiv-font(16, 14);
+		@include adaptive ("line-height", 22, 20, 0);
+		font-weight: 400;
+		color: var(--black);
+	}
+
+	& p:not(:last-child) {
+		margin-bottom: 30px
+	}
+
+	& ul:not(:last-child) {
+		margin-bottom: 30px
+	}
+	
+	& li {
+		@include adaptiv-font(15, 13);
+		@include adaptive ("line-height", 21, 19, 0);
+		font-weight: 300;
+		color: var(--black);
+	}
+
+	& li:not(:last-child) {
+		margin-bottom: 30px
+	}
+	&__body {
+		position: relative;
+		background-color: #ffffff;
+		max-width: 1000px;
+		border-radius: 30px;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		padding: 60px 15px 30px 0;
+		@include adaptive ("padding-left", 30, 15, 0);
+		@media (max-width: 1024px) {
+			max-width: none;
+			width: 95%;
+		}
+	}
+	&__exit {
+		position: absolute;
+		top: 15px;
+		right: 20px;
+		width: 22px;
+		height: 22px;
+		z-index: 3;
+		background-color: transparent;
+		&:before {
+			content: "";
+			position: absolute;
+			top: 10px;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background-color: var(--black);
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+			-webkit-transition: background-color .2s ease-in-out;
+			-o-transition: background-color .2s ease-in-out;
+			transition: background-color .2s ease-in-out;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			top: 10px;
+			right: 0;
+			width: 100%;
+			height: 2px;
+			background-color: var(--black);
+			-webkit-transform: rotate(-45deg);
+			-ms-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+			-webkit-transition: background-color .2s ease-in-out;
+			-o-transition: background-color .2s ease-in-out;
+			transition: background-color .2s ease-in-out;
+		}
+		&:active {
+			&::before {
+				background-color: var(--active);
+			}
+			&::after {
+				background-color: var(--active);
+			}
+		}
+	}
+	&__wrapper-link  {
+		text-align: center;
+		padding: 15px 0 0 0;
+	}
+	&__link {
+		display: inline-block;
+		font-size: 16px;
+		line-height: 1;
+		font-weight: 400;
+		color: var(--white);
+		padding: 15px 40px;
+		border-radius: 15px;
+		background-color: var(--buttonBg_2);
+		-webkit-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		-o-transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		transition: color .2s ease-in-out, background-color .2s ease-in-out;
+		&:active {
+			color: var(--black);
+			background-color: transparent;
+		}
+	}
+	&__scroll {
+		height: 500px;
+		padding-right: 30px;
+	}
+}
+
+.cockie-active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: visible;
+}

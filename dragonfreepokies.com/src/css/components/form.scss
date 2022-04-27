@@ -1,0 +1,385 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+
+.popup-forms {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 15;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1;
+  }
+
+  &__body {
+    position: relative;
+    max-width: 659px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.91);
+    box-shadow: 0px 4px 5px #BA3301;
+    border-radius: 53px;
+    @include adaptive ("padding-top", 51, 42, 0);
+    @include adaptive ("padding-bottom", 51, 42, 0);
+    @include adaptive ("padding-left", 67, 22, 0);
+    @include adaptive ("padding-right", 97, 22, 0);
+    @media (max-width: 768px) {
+      max-width: none;
+      width: 95%;
+    }
+  }
+
+  &__buttons {
+    @include adaptive ("margin-bottom", 87, 37, 0);
+  }
+
+  &__sign {
+    position: relative;
+    font-style: normal;
+    font-weight: 300;
+    @include adaptiv-font(28, 20);
+    @include adaptive ("line-height", 31, 22, 0);
+    color: var(--white);
+    background-color: transparent;
+    @include adaptive ("margin-right", 30, 10, 0);
+    transition: color .2s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--active);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+
+    &:active {
+      color: var(--active);
+
+      &::before {
+        background-color: var(--active);
+      }
+    }
+  }
+
+  &__log {
+    position: relative;
+    font-style: normal;
+    font-weight: 300;
+    @include adaptiv-font(28, 20);
+    @include adaptive ("line-height", 31, 22, 0);
+    color: var(--white);
+    background-color: transparent;
+    transition: color .2s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--active);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+
+    &:active {
+      color: var(--active);
+
+      &::before {
+        background-color: var(--active);
+      }
+    }
+  }
+
+  &__wrapper-reg {
+    display: none;
+  }
+
+  &__wrapper-log {
+    display: none;
+  }
+
+  &__exit {
+    position: absolute;
+    top: 40px;
+    right: 35px;
+    width: 39px;
+    height: 34px;
+    background-color: transparent;
+
+    @media (max-width: 600px) {
+      width: 27px;
+      height: 22px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      top: 13px;
+      left: 0;
+      background-color: var(--white);
+      transform: rotate(45deg);
+      transition: background-color .2s ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      top: 13px;
+      left: 0;
+      background-color: var(--white);
+      transform: rotate(-45deg);
+      transition: background-color .2s ease-in-out;
+    }
+
+    &:active {
+      &::before {
+        background-color: var(--active);
+      }
+
+      &::after {
+        background-color: var(--active);
+      }
+    }
+  }
+}
+
+.reg {
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & span {
+      width: 20%;
+      font-style: normal;
+      font-weight: 300;
+      @include adaptiv-font(28, 16);
+      @include adaptive ("line-height", 31, 22, 0);
+      color: var(--white);
+      @include adaptive ("margin-right", 47, 11, 0);
+    }
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 28px;
+  }
+
+  &__input {
+    width: 73%;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 16px;
+    padding: 0 14px;
+    color: rgba(0, 0, 0, 0.62);
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.79);
+    border-radius: 9px;
+    height: 38px;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    &:focus-visible {
+      border-color: var(--active);
+    }
+  }
+
+  &__wrapper-button {
+    text-align: end;
+  }
+
+  &__btn {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(27, 20);
+    line-height: 26px;
+    text-transform: capitalize;
+    color: var(--white);
+    background: linear-gradient(90deg, #BA3301 0%, #BA9101 100%);
+    @include adaptive ("border-radius", 20, 8, 0);
+    @include adaptive ("padding-left", 32, 23, 0);
+    @include adaptive ("padding-right", 32, 23, 0);
+    @include adaptive ("padding-top", 18, 10, 0);
+    @include adaptive ("padding-bottom", 18, 10, 0);
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+  }
+}
+
+.log {
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & span {
+      width: 20%;
+      font-style: normal;
+      font-weight: 300;
+      @include adaptiv-font(28, 16);
+      @include adaptive ("line-height", 31, 22, 0);
+      color: var(--white);
+      @include adaptive ("margin-right", 47, 11, 0);
+    }
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 28px;
+  }
+
+  &__input {
+    width: 73%;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 16px;
+    padding: 0 14px;
+    color: rgba(0, 0, 0, 0.62);
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.79);
+    border-radius: 9px;
+    height: 38px;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    &:focus-visible {
+      border-color: var(--active);
+    }
+  }
+
+  &__wrapper-button {
+    text-align: end;
+  }
+
+  &__btn {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(27, 20);
+    line-height: 26px;
+    text-transform: capitalize;
+    color: var(--white);
+    background: linear-gradient(90deg, #BA3301 0%, #BA9101 100%);
+    @include adaptive ("border-radius", 20, 8, 0);
+    @include adaptive ("padding-left", 32, 23, 0);
+    @include adaptive ("padding-right", 32, 23, 0);
+    @include adaptive ("padding-top", 18, 10, 0);
+    @include adaptive ("padding-bottom", 18, 10, 0);
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+  }
+}
+
+.popup-forms-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.forms-button-active {
+  color: var(--active);
+
+  &::before {
+    opacity: 1;
+    background-color: var(--active);
+  }
+}
+
+.wrapper-form {
+  display: none;
+}
+
+.wrapper-form-active {
+  display: block;
+  animation-name: wrapper-form;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes wrapper-form {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

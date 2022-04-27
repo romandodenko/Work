@@ -1,0 +1,211 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #ff8c00;
+  --active: #ba3301;
+  --colorInMainTitle: #e3b203;
+  --colorInTitle: #ba3301;
+  --bgButtonGames: #e3b203;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Jost';
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.title {
+  @include adaptiv-font(85, 49);
+  @include adaptive ("line-height", 82, 47, 0);
+  font-weight: 400;
+  color: var(--white);
+}
+
+.subtitle {
+  @include adaptiv-font(52, 34);
+  @include adaptive ("line-height", 57, 37, 0);
+  font-weight: 400;
+  color: var(--white);
+}
+
+.text {
+  @include adaptiv-font(45, 30);
+  @include adaptive ("line-height", 49, 33, 0);
+  font-weight: 300;
+  color: var(--white);
+}
+
+.link {
+  display: inline-block;
+  @include adaptiv-font(26, 22);
+  @include adaptive ("line-height", 38, 32, 0);
+  font-weight: 400;
+  color: var(--white);
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .header__button {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .hero__button {
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  .popup-forms__exit {
+    &:hover {
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+
+  .popup-forms__sign {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .popup-forms__log {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .forms-button-active {
+    &:hover {
+      color: var(--active);
+    }
+  }
+
+  .reg__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+
+  .log__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+
+  .reg__btn {
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  .log__btn {
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  .games__item {
+    &:hover {
+      & .games__play {
+        background-color: var(--hover);
+      }
+
+      & .games__link {
+        color: var(--hover)
+      }
+    }
+  }
+
+  .footer__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .footer__button {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .footer__sublink {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+}

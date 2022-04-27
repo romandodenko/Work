@@ -56,30 +56,6 @@ $maxWidthContainer: 1360;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    @media (max-width: 1024px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-
-  &__bottom {
-    display: none;
-
-    @media (max-width: 1024px) {
-      display: block;
-    }
-  }
-
-  &__left {
-    display: flex;
-    align-items: center;
-
-    @media (max-width: 1024px) {
-      width: 100%;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
   }
 
   &__wrapper-logo {
@@ -169,46 +145,6 @@ $maxWidthContainer: 1360;
   }
 }
 
-.buttons {
-  display: none;
-  // display: flex;
-  align-items: center;
-
-  &__log {
-    @include adaptiv-font(18, 14);
-    line-height: 1;
-    font-weight: 500;
-    color: var(--black);
-    @include adaptive ("padding-top", 17, 10, 0);
-    @include adaptive ("padding-bottom", 17, 10, 0);
-    @include adaptive ("padding-left", 45, 20, 0);
-    @include adaptive ("padding-right", 45, 20, 0);
-    border-radius: 25px;
-    background-color: transparent;
-    margin-right: 10px;
-    color: var(--white);
-    transition: color .2s ease-in-out, background-color .2s ease-in-out;
-
-    @media (max-width: 1024px) {
-      color: var(--black);
-      background-color: var(--buttonBg);
-    }
-  }
-
-  &__sign {
-    @include adaptiv-font(18, 14);
-    line-height: 1;
-    font-weight: 500;
-    color: var(--black);
-    @include adaptive ("padding-top", 17, 10, 0);
-    @include adaptive ("padding-bottom", 17, 10, 0);
-    @include adaptive ("padding-left", 45, 20, 0);
-    @include adaptive ("padding-right", 45, 20, 0);
-    border-radius: 25px;
-    background-color: var(--buttonBg);
-    transition: color .2s ease-in-out, background-color .2s ease-in-out;
-  }
-}
 
 .burger {
   display: none;
@@ -275,73 +211,5 @@ $maxWidthContainer: 1360;
   &::after {
     bottom: 5px;
     background-color: var(--active);
-  }
-}
-
-.profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__text {
-    max-width: 150px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    color: var(--white);
-  }
-
-  &__btn {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    @include adaptiv-font(14, 12);
-    line-height: 1;
-    font-weight: 400;
-    color: var(--white);
-    text-align: center;
-    margin-left: 20px;
-    background-color: transparent;
-    border: 1px solid var(--white);
-    align-self: center;
-    padding: 3px 6px 4px 7px;
-    transition: border-color .2s ease-in-out;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--white);
-      transform: rotate(45deg);
-      transition: background-color .2s ease-in-out;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--white);
-      transform: rotate(-45deg);
-      transition: background-color .2s ease-in-out;
-    }
-
-    &:active {
-      border-color: var(--active);
-      transition-duration: .1s;
-
-      &::before {
-        background-color: var(--active);
-      }
-
-      &::after {
-        background-color: var(--active);
-      }
-    }
   }
 }
