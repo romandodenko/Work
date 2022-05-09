@@ -1,0 +1,248 @@
+<?php 
+ include 'header-page.php';
+?>
+  <main>
+    <section class="hero">
+      <div class="hero__container container">
+        <div class="hero__body">
+          <h1 class="hero__title title">
+            Goldgame
+          </h1>
+          <p class="hero__text text-hero">
+            Játékok és szórakozás közösségi kaszinó mindenkinek
+          </p>
+          <a class="hero__link link-hero" href="index.php#game">Próbálj meg játszani</a>
+        </div>
+      </div>
+    </section>
+    <section class="politicks">
+      <div class="politicks__container container">
+        <h1><strong>Általános Szerződési Feltételek</strong></h1>
+
+        <p>Üdvözöljük a play-goldgame.com oldalon!</p>
+
+        <p>Ezek a feltételek körvonalazzák a play-goldgame.com webhelyének használatára vonatkozó szabályokat és
+          előírásokat, amelyek a play-goldgame.com címen találhatók.</p>
+
+        <p>A webhely megnyitásával feltételezzük, hogy elfogadja ezeket a feltételeket. Ne használja tovább a
+          play-goldgame.com webhelyet, ha nem fogadja el az ezen az oldalon található feltételeket.</p>
+
+        <p>A következő terminológia vonatkozik a jelen Általános Szerződési Feltételekre, Adatvédelmi Nyilatkozatra és
+          Felelősségi Nyilatkozatra, valamint minden Szerződésre: „Ügyfél”, „Ön” és „Ön” az Önre vonatkozik, arra a
+          személyre, aki bejelentkezik ezen a webhelyen, és megfelel a Vállalat feltételeinek és körülmények. A
+          „Vállalat”, „Magunk”, „Mi”, „Mi” és „Mi” kifejezés a Vállalatunkra utal. A „Fél”, „Felek” vagy „Mi” az
+          Ügyfélre és magunkra egyaránt vonatkozik. Valamennyi kifejezés az Ügyfélnek nyújtott segítségünk folyamatának
+          legmegfelelőbb módon történő végrehajtásához szükséges felajánlásra, elfogadásra és a fizetés ellenértékére
+          vonatkozik, kifejezetten abból a célból, hogy az Ügyfélnek a Társaság által meghatározott szolgáltatások
+          nyújtásával kapcsolatos igényeit kielégítsük, összhangban az Ügyféllel. és Hollandia mindenkori jogának
+          megfelelően. A fenti terminológia vagy más szavak egyes számban, többes számban, nagybetűs és/vagy ő/ő szavak
+          használata felcserélhetőnek minősül, és ezért arra utal.</p>
+
+        <h2><strong>Cookie-k</strong></h2>
+
+        <p>Cookie-kat használunk. A play-goldgame.com webhely elérésével beleegyezel a cookie-k használatába a
+          play-goldgame.com adatvédelmi szabályzatával összhangban. </p>
+
+        <p>A legtöbb interaktív webhely cookie-kat használ annak érdekében, hogy minden egyes látogatáshoz lekérjük a
+          felhasználó adatait. Weboldalunk cookie-kat használ bizonyos területek működésének lehetővé tételére, hogy
+          megkönnyítse a weboldalunk látogatói számára. Egyes leányvállalataink/hirdetőpartnereink cookie-kat is
+          használhatnak.</p>
+
+        <h2><strong>Licenc</strong></h2>
+
+        <p>Ha nincs másképp jelezve, a play-goldgame.com és/vagy licencadói a play-goldgame.com webhelyen található
+          összes anyag szellemi tulajdonjogának tulajdonát képezik. Minden szellemi tulajdonjog fenntartva. Ezt saját
+          személyes használatra a play-goldgame.com webhelyről érheti el, a jelen feltételekben meghatározott
+          korlátozások mellett.</p>
+
+        <p>Nem szabad:</p>
+        <ul>
+          <li>Tegye közzé újra az anyagokat a play-goldgame.com webhelyről</li>
+          <li>A play-goldgame.com webhelyről származó anyagok eladása, bérbeadása vagy továbbengedélyezése</li>
+          <li>A play-goldgame.com webhelyen található anyagok reprodukálása, sokszorosítása vagy másolása</li>
+          <li>Tartalom újraterjesztése a play-goldgame.com webhelyről</li>
+        </ul>
+
+        <p>A webhely egyes részei lehetőséget kínálnak a felhasználóknak, hogy a webhely bizonyos területein
+          közzétegyenek, véleményt és információkat cseréljenek. A play-goldgame.com nem szűri, szerkeszti, nem teszi
+          közzé vagy nézi át a megjegyzéseket, mielőtt azok megjelennének a webhelyen. A megjegyzések nem tükrözik a
+          play-goldgame.com, ügynökei és/vagy leányvállalatai nézeteit és véleményét. A megjegyzések a nézeteiket és
+          véleményüket közzétevő személy nézeteit és véleményét tükrözik. A vonatkozó törvények által megengedett
+          mértékig a play-goldgame.com nem vállal felelősséget a megjegyzésekért, illetve semmilyen felelősségért,
+          károkért vagy kiadásokért, amelyeket a játék használata és/vagy közzététele és/vagy megjelenése okozott
+          és/vagy elszenvedett. a megjegyzéseket ezen a webhelyen.</p>
+
+         <p>play-goldgame.com fenntartja magának a jogot, hogy figyelemmel kísérje az összes megjegyzést, és
+          eltávolítson minden olyan megjegyzést, amely nem megfelelőnek, sértőnek tekinthető vagy a jelen Feltételek
+          megsértését okozza.</p>
+
+        <p>Ön szavatolja és kijelenti, hogy:</p>
+
+        <ul>
+          <li>Ön jogosult a megjegyzések közzétételére a webhelyünkön, és rendelkeznie kell minden szükséges engedéllyel
+            és hozzájárulással;</li>
+          <li>A megjegyzések nem sértenek semmilyen szellemi tulajdonjogot, beleértve a korlátozás nélkül bármely
+            harmadik fél szerzői jogát, szabadalmát vagy védjegyét;</li>
+          <li>A megjegyzések nem tartalmaznak semmilyen rágalmazó, rágalmazó, sértő, illetlen vagy más módon jogellenes
+            anyagot, amely sérti a magánéletet.</li>
+          <li>A Megjegyzések nem használhatók fel üzleti vagy egyéni vagy kereskedelmi tevékenységek vagy jogellenes
+            tevékenység felhívására vagy népszerűsítésére.</li>
+        </ul>
+
+        <p>Ön ezennel nem kizárólagos engedélyt ad a play-goldgame.com számára, hogy felhasználja, reprodukálja,
+          szerkessze, és felhatalmazz másokat arra, hogy bármilyen formában, formátumban vagy médiában felhasználják,
+          reprodukálják és szerkesszék az Ön megjegyzéseit.</p>
+
+        <h2><strong>Tartalmunkra mutató hiperhivatkozás</strong></h2>
+
+        <p>A következő szervezetek előzetes írásbeli engedély nélkül hivatkozhatnak webhelyünkre:</p>
+
+        <ul>
+          <li>Kormányzati ügynökségek;</li>
+          <li>Keresőmotorok;</li>
+          <li>Hírszervezetek;</li>
+          <li>Az online címjegyzék-terjesztők ugyanúgy hivatkozhatnak Webhelyünkre, mint más listán szereplő
+            vállalkozások webhelyeire; és</li>
+          <li>A rendszer egészére kiterjedő akkreditált vállalkozások, kivéve a non-profit szervezetek, jótékonysági
+            bevásárlóközpontok és jótékonysági adománygyűjtő csoportok megkeresését, amelyek nem hivatkozhatnak
+            webhelyünkre.</li>
+        </ul>
+
+        <p>Ezek a szervezetek hivatkozhatnak honlapunkra, kiadványokra vagy a Webhely egyéb információira, amennyiben a
+          hivatkozás: (a) semmilyen módon nem megtévesztő; (b) nem utal hamisan az összekötő fél és termékei és/vagy
+          szolgáltatásai szponzorálására, támogatására vagy jóváhagyására; és (c) illeszkedik az összekötő fél
+          webhelyének kontextusába.</p>
+
+        <p>A következő típusú szervezetektől származó egyéb összekapcsolási kérelmeket mérlegelhetünk és jóváhagyhatunk:
+        </p>
+
+        <ul>
+          <li>általánosan ismert fogyasztói és/vagy üzleti információforrások;</li>
+          <li>dot.com közösségi oldalak;</li>
+          <li>egyesületek vagy más jótékonysági szervezeteket képviselő csoportok;</li>
+          <li>online címtár-terjesztők;</li>
+          <li>internetes portálok;</li>
+          <li>számviteli, jogi és tanácsadó cégek; és</li>
+          <li>oktatási intézmények és szakmai szövetségek.</li>
+        </ul>
+
+        <p>Jóváhagyjuk az ezektől a szervezetektől érkező linkelési kérelmeket, ha úgy döntünk, hogy: (a) a link nem
+          kelt minket kedvezőtlenül önmagunk vagy akkreditált vállalkozásaink szemében; (b) a szervezetnek nincs negatív
+          nyilvántartása nálunk; (c) a hiperhivatkozás láthatóságából származó előny számunkra kompenzálja a
+          play-goldgame.com hiányát; és (d) a hivatkozás az általános forrásinformációk kontextusában található.</p>
+
+        <p>Ezek a szervezetek hivatkozhatnak honlapunkra, amennyiben a link: (a) semmilyen módon nem megtévesztő; (b)
+          nem utal hamisan az összekötő fél és termékei vagy szolgáltatásai szponzorálására, támogatására vagy
+          jóváhagyására; és (c) illeszkedik az összekötő fél webhelyének kontextusába.</p>
+
+        <p>Ha Ön a fenti 2. bekezdésben felsorolt ​​szervezetek egyike, és érdeklődik a webhelyünkre mutató hivatkozás
+          iránt, értesítenie kell minket a play-goldgame.com címre küldött e-mailben. Kérjük, adja meg nevét, szervezete
+          nevét, elérhetőségi adatait, valamint webhelye URL-jét, azon URL-ek listáját, amelyekről a webhelyünkre
+          hivatkozni kíván, valamint azon URL-ek listáját a webhelyünkön, amelyekre szeretne link. Várjon 2-3 hetet a
+          válaszra.</p>
+
+        <p>A jóváhagyott szervezetek az alábbiak szerint hivatkozhatnak webhelyünkre:</p>
+
+        <ul>
+          <li>Cégünk nevének használatával; vagy</li>
+          <li>A hivatkozott egységes erőforrás-kereső használatával; vagy</li>
+          <li>A Webhelyünkre hivatkozott bármely más leírás használatával, amely a linket létrehozó fél webhelyén
+            található tartalom kontextusában és formátumában értelmes.</li>
+        </ul>
+
+        <p>A play-goldgame.com logója vagy más grafikai alkotások használata védjegylicenc szerződés hiányában nem
+          engedélyezett.</p>
+
+        <h2><strong>iFrames</strong></h2>
+
+        <p>Előzetes jóváhagyás és írásos engedély nélkül nem hozhat létre olyan kereteket Weboldalaink körül, amelyek
+          bármilyen módon megváltoztatják Webhelyünk vizuális megjelenését vagy megjelenését.</p>
+
+        <h2><strong>Tartalmi felelősség</strong></h2>
+
+        <p>Nem vállalunk felelősséget a webhelyén megjelenő tartalomért. Ön beleegyezik abba, hogy megvéd és megvéd
+          minket minden olyan követeléssel szemben, amely a webhelyén felmerül. A Weboldalon nem jelenhetnek meg olyan
+          linkek, amelyek rágalmazónak, obszcénnek vagy bűnözőnek tekinthetők, vagy amelyek sértik, más módon sértik,
+          illetve harmadik fél jogainak megsértését vagy más módon megsértését javasolják.</p>
+
+        <h2><strong>Jogfenntartás</strong></h2>
+
+        <p>Fenntartjuk a jogot arra, hogy megkérjük, hogy távolítson el minden linket vagy bármely konkrét hivatkozást a
+          webhelyünkre. Ön beleegyezik, hogy kérésre haladéktalanul eltávolítsa a weboldalunkra mutató linkeket.
+          Fenntartjuk továbbá a jogot, hogy ezeket a feltételeket és a linkekre vonatkozó szabályzatot bármikor
+          módosítsuk. A Weboldalunkra mutató folyamatos hivatkozással Ön beleegyezik, hogy betartja és betartja a
+          linkelési feltételeket.</p>
+
+        <h2><strong>Hivatkozások eltávolítása webhelyünkről</strong></h2>
+
+        <p>Ha webhelyünkön bármilyen okból sértő hivatkozást talál, bármikor felveheti velünk a kapcsolatot, és
+          értesíthet bennünket. Figyelembe vesszük a linkek eltávolítására irányuló kéréseket, de nem vagyunk kötelesek
+          erre vagy arra, hogy közvetlenül válaszoljunk Önnek.</p>
+
+        <p>Nem garantáljuk, hogy az ezen a weboldalon található információk helyesek, nem garantáljuk azok teljességét
+          vagy pontosságát; azt sem ígérjük, hogy a webhely elérhető maradjon, vagy hogy a webhelyen található anyagok
+          naprakészek legyenek.</p>
+
+        <h2><strong>Felelősség kizárása</strong></h2>
+
+        <p>A vonatkozó jogszabályok által megengedett maximális mértékig kizárunk minden, a weboldalunkkal és a webhely
+          használatával kapcsolatos nyilatkozatot, garanciát és feltételt. Ebben a felelősségkizárásban semmi nem jár:
+        </p>
+
+        <ul>
+          <li>korlátozza vagy kizárja a mi vagy az Ön felelősségét halál vagy személyi sérülés esetén;</li>
+          <li>korlátozza vagy kizárja a mi vagy az Ön felelősségét csalásért vagy csalárd félrevezetésért;</li>
+          <li>korlátozza a mi vagy az Ön felelősségét a vonatkozó jogszabályok által nem megengedett módon; vagy</li>
+          <li>zárja ki a mi vagy az Ön felelősségét, amely a vonatkozó törvények értelmében nem zárható ki.</li>
+        </ul>
+
+        <p>Az ebben a szakaszban és a jelen felelősségkizárási nyilatkozatban máshol meghatározott
+          felelősségkorlátozások és tilalmak: (a) az előző bekezdés hatálya alá tartoznak; és (b) szabályozza a
+          felelősségkizárásból eredő összes kötelezettséget, beleértve a szerződésből, a jogsértésből és a törvényes
+          kötelezettségek megszegéséből eredő kötelezettségeket.</p>
+
+        <p>Amíg a webhely, valamint a webhelyen található információk és szolgáltatások ingyenesek, nem vállalunk
+          felelősséget semmilyen veszteségért vagy kárért.</p>
+      </div>
+    </section>
+  </main>
+  <div class="popup-log">
+    <div class="popup-log__close"></div>
+    <div class="popup-log__body">
+      <form class="popup-log__form-log log" action="#" method="POST">
+        <div class="log__label">
+          <input class="log__input" type="email" placeholder="Your e-mail" name="email" required>
+        </div>
+        <div class="log__label">
+          <input class="log__input" type="password" placeholder="Password" name="password" required>
+        </div>
+        <input class="log__btn" type="submit" name="log_in" value="Engedélyezés">
+      </form>
+      <button class="popup-log__exit"></button>
+    </div>
+  </div>
+  <div class="popup-reg">
+    <div class="popup-reg__close"></div>
+    <div class="popup-reg__body">
+      <form class="popup-reg__form-reg reg" action="#" method="POST">
+      <input type="text" name="country" hidden value="hu">
+			<input type="text" name="site" hidden value="play-goldgame.com">
+        <div class="reg__label">
+          <input class="reg__input" type="email" placeholder="Email" name="email" required> 
+        </div>
+        <div class="reg__label">
+          <input class="reg__input" type="password" placeholder="Password" name="password" required>
+        </div>
+        <div class="reg__label">
+          <input class="reg__checkbox" type="checkbox" required><span class="reg__span">ismerkedtem meg <a
+              href="policy.html">adatvédelmi irányelvek</a> és <a href="terms.html">felhasználási feltételek</a> és elfogadom
+              van</span>
+        </div>
+        <input class="reg__btn" type="submit" name="sign_up" value="Bejegyzés">
+      </form>
+      <button class="popup-reg__exit"></button>
+    </div>
+  </div>
+  <?php 
+  include 'footer-page.php';
+?>

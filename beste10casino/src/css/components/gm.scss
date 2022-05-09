@@ -1,0 +1,445 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.gm {
+  @include adaptive ("padding-top", 40, 20, 0);
+  @include adaptive ("padding-bottom", 90, 40, 0);
+  overflow: hidden;
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  &__list {
+    @include adaptive ("margin-bottom", 50, 20, 0);
+  }
+
+  &__name-game {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__item {
+    width: 453px;
+    min-height: 380px;
+    margin-bottom: 30px;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      min-height: 280px;
+    }
+  }
+
+  &__link-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+
+  &__item:not(:nth-child(3n)) {
+    margin-right: 20px;
+
+    @media (max-width: 600px) {
+      margin-right: 0;
+    }
+  }
+
+  &__top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 282px;
+    border-radius: 23px;
+    margin-bottom: 30px;
+    @include adaptive ("padding", 20, 10, 0);
+
+    @media (max-width: 600px) {
+      height: 205px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(0deg, #090909 0%, rgba(0, 0, 0, 0) 100%);
+      border-radius: 23px;
+      z-index: 1;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    transition: transform .2s ease-in-out;
+  }
+
+  &__link_link {
+    display: inline-flex;
+    align-items: center;
+    color: #C9C9C9;
+
+    &:hover {
+      color: #C9C9C9;
+    }
+
+    & img {
+      margin-top: 2px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.take-olympus {
+  background-image: url(../../img/take-olympus.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/take-olympus_320.png);
+  }
+}
+
+.dragon-kingdom {
+  background-image: url(../../img/dragon-kingdom.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/dragon-kingdom_320.png);
+  }
+}
+
+.eye-storm {
+  background-image: url(../../img/eye-storm.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/eye-storm_320.png);
+  }
+}
+
+.stacked {
+  background-image: url(../../img/stacked.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/stacked_320.png);
+  }
+}
+
+.sinbad {
+  background-image: url(../../img/sinbad.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/sinbad_320.png);
+  }
+}
+
+.shimmering-woods {
+  background-image: url(../../img/shimmering-wods.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/shimmering-wods_320.png);
+  }
+}
+
+.goldenox {
+  background-image: url(../../img/goldenox.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/goldenox_320.png);
+  }
+}
+
+.gates-of-olympus {
+  background-image: url(../../img/gates-of-olympus.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/gates-of-olympus_320.png);
+  }
+}
+
+.ancients-blessing {
+  background-image: url(../../img/ancients-blessing.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/ancients-blessing_320.png);
+  }
+}
+
+.gm-game {
+  @include adaptive ("padding-top", 150, 50, 0);
+  @include adaptive ("padding-bottom", 100, 50, 0);
+}
+
+.game-list {
+  display: grid;
+  grid-template: auto / repeat(3, minmax(0, 453px));
+  gap: 20px;
+
+  @media (max-width: 1455px) {
+    grid-template-columns: repeat(2, minmax(0, 453px));
+  }
+}
+
+.game {
+  @include adaptive ("padding-top", 150, 70, 0);
+  @include adaptive ("padding-bottom", 100, 50, 0);
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  &__list {
+    gap: 20px;
+  }
+
+  &__item {
+    width: 453px;
+    min-height: 380px;
+    margin-bottom: 30px;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      min-height: 280px;
+    }
+  }
+
+  &__top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 282px;
+    border-radius: 23px;
+    margin-bottom: 30px;
+    @include adaptive ("padding", 20, 10, 0);
+
+    @media (max-width: 600px) {
+      height: 205px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(0deg, #090909 0%, rgba(0, 0, 0, 0) 100%);
+      border-radius: 23px;
+      z-index: 1;
+    }
+  }
+
+  &__name-game {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__link-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__link {
+    display: inline-block;
+    transition: transform .2s ease-in-out;
+  }
+}
+
+.gm-ab {
+  padding-top: 150px;
+  @include adaptive ("padding-bottom", 100, 50, 0);
+  height: 100%;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 150, 90, 0);
+  }
+
+  &__container {
+    height: 100%;
+  }
+
+  &__body {
+    gap: 20px;
+  }
+
+  &__image {
+    width: 49%;
+    text-align: center;
+
+    & img {
+      max-width: 100%;
+    }
+
+    @media (max-width: 991px) {
+      width: 100%;
+    }
+  }
+
+  &__descr {
+    width: 49%;
+
+    @media (max-width: 991px) {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  &__text {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(32, 18);
+    @include adaptive ("line-height", 37, 23, 0);
+    color: var(--white);
+  }
+
+  &__text:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__wrapper-link {
+    text-align: end;
+  }
+
+  &__link {
+    display: inline-block;
+    transition: transform .2s ease-in-out;
+  }
+}
+
+.gm-ifr {
+  padding-top: 150px;
+  @include adaptive ("padding-bottom", 100, 50, 0);
+  height: 100%;
+
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 150, 90, 0);
+  }
+
+  &__container {
+    height: 100%;
+  }
+
+  &__title {
+    @include adaptive ("margin-bottom", 60, 30, 0);
+    text-align: center;
+  }
+
+  &__wrapper-iframe {
+    text-align: center;
+
+    & iframe {
+      width: 90%;
+      height: 609px;
+
+      @media (max-width: 1024px) {
+        height: 500px;
+      }
+
+      @media (max-width: 600px) {
+        width: 100%;
+        height: 350px;
+      }
+    }
+  }
+}
+
+.sinbad-iframe {
+
+  & iframe {
+    width: 70%;
+    @include adaptive ("height", 555, 250, 0);
+    // @media (max-width: 1024px) {
+    //   height: 500px;
+    // }
+  
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+}

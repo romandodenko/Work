@@ -1,0 +1,125 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1155;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.footer {
+  @include adaptive ("padding-top", 40, 15, 0);
+  @include adaptive ("padding-bottom", 40, 15, 0);
+  background-color: #74500c;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 1115px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__left {
+    width: 35%;
+    margin-right: 30px;
+    @media (max-width: 1115px) {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 50px;
+    }
+  }
+
+  &__wrapper-logo {
+    margin-bottom: 43px;
+  }
+  
+  &__logo {
+    & img {
+      max-width: 100%;
+    }
+  }
+  
+  &__text {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 41px;
+    color: #f3bc09;
+  }
+
+  &__right {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: end;
+    @media (max-width: 1115px) {
+      width: 100%;
+      align-items: flex-start;
+      justify-items: flex-start;
+    }
+  }
+
+  &__ls {
+    display: flex;
+    align-items: center;
+    @media (max-width: 705px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__ls:not(:last-child) {
+    margin-bottom: 50px;
+  }
+
+  &__it:not(:last-child) {
+    @include adaptive ("margin-right", 45, 30, 0);
+    @media (max-width: 705px) {
+      margin-right: 0;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__link {
+    transition: color .2s ease-in-out;
+  }
+}

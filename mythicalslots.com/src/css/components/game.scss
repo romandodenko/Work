@@ -1,0 +1,242 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.game {
+  padding: 66px 0;
+
+  &__title {
+    color: #bf2e00;
+    margin-bottom: 27px;
+  }
+
+  &__body {
+    @include adaptive ("padding-top", 200, 10, 0);
+    @include adaptive ("padding-bottom", 200, 10, 0);
+  }
+
+  &__list {
+    display: grid;
+    grid-template: auto / repeat(12,1fr);
+    grid-template-areas: "item1 item1 item1 item1 item1 item1 item2 item2 item2 item2 item2 item2" ". . . item3 item3 item3 item3 item3 item3 . . .";
+    gap: 20px;
+    justify-content: center;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "item1" "item2" "item3";
+    }
+  }
+
+&__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 485px;
+  border-radius: 20px;
+  padding: 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform .2s ease-in-out;
+  @media (max-width: 768px) {
+    @include adaptive ("min-height", 485, 263, 0);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    background: linear-gradient(360deg, rgba(0, 0, 0, 0.63) 17.19%, rgba(196, 196, 196, 0) 100%);
+    z-index: 1;
+  }
+}
+
+  &__item:nth-child(1) {
+    grid-area: item1;
+    background-image: url(../../img/riches-of-midgard.png);
+    @media (max-width: 600px) {
+      background-image: url(../../img/riches-of-midgard-320.png);
+      background-size: cover;
+    }
+  }
+
+  &__item:nth-child(2) {
+    grid-area: item2;
+    background-image: url(../../img/hall-of-gods.png);
+    @media (max-width: 600px) {
+      background-image: url(../../img/hall-of-gods-320.png);
+      background-size: cover;
+    }
+  }
+
+  &__item:nth-child(3) {
+    grid-area: item3;
+    background-image: url(../../img/parthenon-quest-for-immortality.png);
+    @media (max-width: 600px) {
+      background-image: url(../../img/parthenon-quest-for-immortality-320.png);
+      background-size: cover;
+    }
+  }
+
+  &__links {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  &__play {
+    display: inline-block;
+    text-transform: uppercase;
+    @include adaptiv-font(38, 13);
+    @include adaptive ("line-height", 43, 15, 0);
+    font-weight: 400;
+    color: var(--white);
+    background-color: #f4a32d;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    margin-right: 30px;
+    transition: border-color .2s ease-in-out, background-color .2s ease-in-out;
+    &:active {
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+
+  &__more {
+    display: inline-block;
+    text-transform: uppercase;
+    @include adaptiv-font(38, 13);
+    @include adaptive ("line-height", 43, 15, 0);
+    font-weight: 400;
+    color: var(--white);
+    background-color: #bf2e00;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    transition: border-color .2s ease-in-out, background-color .2s ease-in-out;
+    &:active {
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+}
+
+.game-iframe {
+  @include adaptive ("padding-top", 150, 50, 0);
+  @include adaptive ("padding-bottom", 150, 50, 0);
+  &__container {
+    text-align: center;
+  }
+  &__title {
+    color: #bf2e00;
+    margin-bottom: 30px;
+  }
+  & iframe {
+    @include adaptive ("width", 1060, 290, 0);
+    @include adaptive ("height", 600, 350, 0);
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+}
+
+.game-solo {
+  @include adaptive ("padding-top", 150, 50, 0);
+  @include adaptive ("padding-bottom", 150, 50, 0);
+
+  &__container {
+  }
+
+  &__image {
+    text-align: center;
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  &__title {
+    color: #bf2e00;
+    padding: 65px 0;
+  }
+
+  &__body {
+    display: grid;
+    grid-template: auto / repeat(2,1fr);
+    gap: 65px 20px;
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__text {
+    color: #e33018;
+  }
+
+  &__wrapper-link {
+    text-align: center;
+  }
+
+  &__play {
+    display: inline-block;
+    text-transform: uppercase;
+    @include adaptiv-font(38, 13);
+    @include adaptive ("line-height", 43, 15, 0);
+    font-weight: 400;
+    color: var(--white);
+    background-color: #bf2e00;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    margin-top: 30px;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+    &:active {
+      color: #bf2e00;
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+}
+

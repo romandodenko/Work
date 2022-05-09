@@ -1,0 +1,383 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.popup-log {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 1;
+  }
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    background-color: #f4a32d;
+    max-width: 600px;
+    border-radius: 25px;
+    padding-top: 50px;
+    @include adaptive ("padding-bottom", 30, 15, 0);
+    @include adaptive ("padding-left", 30, 15, 0);
+    @include adaptive ("padding-right", 30, 15, 0);
+    transform: translate(-50%,-50%);
+    @media (max-width: 635px) {
+      max-width: none;
+      width: 95%;
+    }
+  }
+
+  &__exit {
+    position: absolute;
+    top: 15px;
+    @include adaptive ("right", 30, 15, 0);
+    width: 28px;
+    height: 20px;
+    background-color: transparent;
+    &:active {
+      &::before {
+        background-color: #bf2e00;
+      }
+      &::after {
+        background-color: #bf2e00;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(45deg);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(-45deg);
+    }
+  }
+
+}
+.log {
+
+  &__label:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 45px;
+    border: 2px solid var(--white);
+    background-color: transparent;
+    border-radius: 25px;
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    padding: 0 15px;
+    transition: border-color .2s ease-in-out;
+    &::placeholder {
+      @include adaptiv-font(18, 16);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--white);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+    &:focus-visible {
+      border-color: #bf2e00;
+    }
+  }
+
+  &__btn {
+    text-transform: uppercase;
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    background-color: #bf2e00;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+    &:active {
+      color: #bf2e00;
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+}
+
+.popup-reg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 1;
+  }
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    background-color: #f4a32d;
+    max-width: 600px;
+    border-radius: 25px;
+    padding-top: 50px;
+    @include adaptive ("padding-bottom", 30, 15, 0);
+    @include adaptive ("padding-left", 30, 15, 0);
+    @include adaptive ("padding-right", 30, 15, 0);
+    transform: translate(-50%,-50%);
+    @media (max-width: 635px) {
+      max-width: none;
+      width: 95%;
+    }
+  }
+
+  &__exit {
+    position: absolute;
+    top: 15px;
+    @include adaptive ("right", 30, 15, 0);
+    width: 28px;
+    height: 20px;
+    background-color: transparent;
+    &:active {
+      &::before {
+        background-color: #bf2e00;
+      }
+      &::after {
+        background-color: #bf2e00;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(45deg);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(-45deg);
+    }
+  }
+
+}
+.reg {
+
+  &__label {
+    position: relative;
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 45px;
+    border: 2px solid var(--white);
+    background-color: transparent;
+    border-radius: 25px;
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    padding: 0 15px;
+    transition: border-color .2s ease-in-out;
+    &::placeholder {
+      @include adaptiv-font(18, 16);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--white);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+    &:focus-visible {
+      border-color: #bf2e00;
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      & + .reg__span {
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__span {
+    position: relative;
+    display: inline-block;
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    padding-left: 20px;
+    & a {
+      color: #bf2e00;
+      transition: color .2s ease-in-out;
+      &:active {
+        color: var(--white);
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      border: 1px solid var(--white);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 8px;
+      border-right: 1px solid var(--white);
+      border-bottom: 1px solid var(--white);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+  }
+
+
+  &__btn {
+    text-transform: uppercase;
+    @include adaptiv-font(18, 16);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--white);
+    background-color: #bf2e00;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
+    &:active {
+      color: #bf2e00;
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+}
+.popup-log-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.popup-reg-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

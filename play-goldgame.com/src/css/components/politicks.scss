@@ -1,0 +1,121 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1155;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.politicks {
+  position: relative;
+  @include adaptive ("padding-top", 100, 50, 0);
+  @include adaptive ("padding-bottom", 100, 50, 0);
+  background-color: #74500c;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #74500c;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #74500c;
+  }
+
+  & h1 {
+    font-family: 'NewRocker';
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(48, 22);
+    @include adaptive ("line-height", 58, 30, 0);
+    text-transform: uppercase;
+    color: #f3bc09;
+    text-shadow: 2px 9px 7px rgba(255, 93, 2, 0.82);
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+
+  & h2 {
+    font-family: 'NewRocker';
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(38, 18);
+    @include adaptive ("line-height", 46, 26, 0);
+    text-transform: uppercase;
+    color: #ffe603;
+    text-shadow: 2px 9px 7px rgba(255, 93, 2, 0.82);
+    margin-bottom: 30px;
+  }
+
+  & p {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 36, 24, 0);
+    color: #ff5d02d1;
+  }
+
+  & p:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  & ul:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  & li {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(20, 14);
+    @include adaptive ("line-height", 32, 22, 0);
+    color: #ff5d02d1;
+  }
+
+  & li:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}

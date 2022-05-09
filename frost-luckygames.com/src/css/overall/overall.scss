@@ -1,0 +1,346 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #431480;
+  --active: #431480;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Battambang';
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 900;
+  @include adaptiv-font(79, 39);
+  @include adaptive ("line-height", 143, 70, 0);
+  text-transform: uppercase;
+  color: #431480;
+}
+
+.title-a {
+  font-style: normal;
+  font-weight: 900;
+  @include adaptiv-font(48, 28);
+  @include adaptive ("line-height", 87, 42, 0);
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.text-h {
+  font-style: normal;
+  font-weight: 500;
+  @include adaptiv-font(36, 25);
+  @include adaptive ("line-height", 40, 28, 0);
+  color: #12297C;
+}
+
+.text {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(22, 15);
+  @include adaptive ("line-height", 40, 27, 0);
+  color: var(--white);
+}
+
+.subtitle {
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 900;
+  @include adaptiv-font(40, 18);
+  @include adaptive ("line-height", 72, 30, 0);
+  text-align: center;
+  color: var(--white);
+}
+
+.subtitle-a {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 700;
+  @include adaptiv-font(27, 11);
+  @include adaptive ("line-height", 49, 20, 0);
+  color: var(--white);
+
+}
+
+.text {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  @include adaptiv-font(22, 12);
+  @include adaptive ("line-height", 40, 23, 0);
+  font-weight: 400;
+  color: var(--white);
+}
+
+.link {
+  font-family: "Comfortaa";
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(20 , 16);
+  @include adaptive ("line-height", 43, 39, 0);
+  color: var(--white);
+}
+
+.link-politicks {
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(21, 16);
+  @include adaptive ("line-height", 41, 36, 0);
+  color: #431480;
+}
+
+.hero-l {
+  display: inline-block;
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(40, 20);
+  @include adaptive ("line-height", 45, 22, 0);
+  color: #FFFFFF;
+  @include adaptive ("padding-top", 15, 7, 0);
+  @include adaptive ("padding-bottom", 15, 7, 0);
+  @include adaptive ("padding-right", 30, 20, 0);
+  @include adaptive ("padding-left", 30, 20, 0);
+  background-color: #12297C;
+  border: 3px solid transparent;
+  box-shadow: 0px 4px 7px #12297C;
+  border-radius: 20px;
+}
+
+.game-link-p {
+  display: inline-block;
+    font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(25, 14);
+  @include adaptive ("line-height", 45, 26, 0);
+  color: var(--white);
+  border: 3px solid #E6E6E6;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px #431480;
+  border-radius: 20px;
+  padding: 10 55 5 27;
+  @include adaptive ("padding-top", 10, 5, 0);
+  @include adaptive ("padding-bottom", 10, 5, 0);
+  @include adaptive ("padding-left", 55, 15, 0);
+  @include adaptive ("padding-right", 55, 15, 0);
+}
+
+.game-link-a {
+  display: inline-block;
+    font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(25, 14);
+  @include adaptive ("line-height", 45, 26, 0);
+  color: var(--white);
+  border: 3px solid transparent;
+  background-color: #431480;
+  box-shadow: 0px 4px 4px #431480;
+  border-radius: 20px;
+  @include adaptive ("padding-top", 10, 5, 0);
+  @include adaptive ("padding-bottom", 10, 5, 0);
+  @include adaptive ("padding-left", 20, 10, 0);
+  @include adaptive ("padding-right", 20, 10, 0);
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__link {
+    &:hover {
+      color: var(--hover);
+    }
+  }
+
+  .header__sign {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .header__log {
+    &:hover {
+      background-color: var(--hover);
+    }
+  }
+
+  .profile__btn {
+    &:hover {
+      border-color: var(--hover);
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+
+  .warning-popup__exit {
+    &:hover {
+      color: var(--hover);
+      background-color: var(--white);
+      border-color: var(--white);
+    }
+  }
+
+  .hero__link {
+    &:hover {
+      border-color: #12297c;
+      background-color: transparent;
+      color: #12297c;
+    }
+  }
+
+  .game-link-p {
+    &:hover {
+      background-color: var(--hover);
+      border-color: transparent;
+    }
+  }
+
+  .game-link-a {
+    &:hover {
+      background-color: transparent;
+      border-color: #E6E6E6;
+    }
+  }
+
+  .log__btn {
+    &:hover {
+      background-color: transparent;
+      border-color: #E6E6E6;
+    }
+  }
+
+  .reg__btn {
+    &:hover {
+      background-color: transparent;
+      border-color: #E6E6E6;
+    }
+  }
+
+  .reg {
+    & span {
+      & a {
+       &:hover {
+          color: var(--white);
+        }
+      }
+    }
+  }
+
+  .popup-reg__exit {
+    &:hover {
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+
+  .popup-log__exit {
+    &:hover {
+      &::before {
+        background-color: var(--hover);
+      }
+      &::after {
+        background-color: var(--hover);
+      }
+    }
+  }
+
+  .log__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+
+  .reg__input {
+    &:hover {
+      border-color: var(--hover);
+    }
+  }
+
+
+  .footer__link {
+    &:hover {
+      color: var(--white);
+    }
+  }
+
+  .footer__politicks-link {
+    &:hover {
+      color: var(--white);
+    }
+  }
+}

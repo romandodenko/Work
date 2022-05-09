@@ -1,0 +1,311 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #7B68EE;
+  --active: #4169E1;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'JockeyOne';
+  background-color: #1C1F2D;
+}
+main {
+  flex: 1 1 auto;
+}
+
+.hd-button-log {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  @include adaptiv-font(22, 16);
+  @include adaptive ("line-height", 29, 23, 0);
+  color: #A2A2A2;
+  background-color: rgba(255, 255, 255, 0.17);
+  border-radius: 13px;
+  @include adaptive ("padding-top", 6, 3, 0);
+  @include adaptive ("padding-bottom", 6, 3, 0);
+  @include adaptive ("padding-left", 20, 10, 0);
+  @include adaptive ("padding-right", 20, 10, 0);
+}
+
+.hd-button-sign {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  @include adaptiv-font(22, 16);
+  @include adaptive ("line-height", 29, 23, 0);
+  color: #A2A2A2;
+  background-color: #CB9F54;
+  border-radius: 13px;
+  @include adaptive ("padding-top", 6, 3, 0);
+  @include adaptive ("padding-bottom", 6, 3, 0);
+  @include adaptive ("padding-left", 20, 10, 0);
+  @include adaptive ("padding-right", 20, 10, 0);
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(101, 56);
+  @include adaptive ("line-height", 97, 52, 0);
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.hr-text {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(24, 16);
+  @include adaptive ("line-height", 26, 18, 0);
+  text-transform: uppercase;
+  color: var(--white)
+}
+
+.hr-button {
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(27, 22);
+  @include adaptive ("line-height", 26, 21, 0);
+  text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(96.06deg, #AD3421 0%, rgba(58, 13, 6, 0.92) 100%);
+  border-radius: 15px;
+  @include adaptive ("padding-top", 30, 15, 0);
+  @include adaptive ("padding-bottom", 30, 15, 0);
+  @include adaptive ("padding-left", 62, 30, 0);
+  @include adaptive ("padding-right", 62, 30, 0);
+}
+
+.subtitle {
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(46, 24);
+  @include adaptive ("line-height", 53, 28, 0);
+  text-transform: uppercase;
+  color: #CB9F54;
+}
+
+.text {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(27, 18);
+  @include adaptive ("line-height", 31, 22, 0);
+  color: var(--white);
+}
+
+.link {
+  display: inline-block;
+  font-family: 'Kodchasan';
+  font-style: normal;
+  @include adaptiv-font(22, 16);
+  @include adaptive ("line-height", 29, 23, 0);
+  color: #A2A2A2;
+  &:hover {
+    color: #A2A2A2;
+  }
+}
+
+.game-name {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  font-weight: 600;
+  @include adaptiv-font(33, 19);
+  @include adaptive ("line-height", 38, 24, 0);
+  color: var(--white);
+}
+
+.about-link {
+  font-family: 'Kodchasan';
+  font-style: normal;
+  font-weight: 600;
+  @include adaptiv-font(25, 18);
+  @include adaptive ("line-height", 29, 22, 0);
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.32);
+  border-radius: 26px;
+  @include adaptive ("padding-top", 15, 8, 0);
+  @include adaptive ("padding-bottom", 15, 8, 0);
+  @include adaptive ("padding-left", 30, 15, 0);
+  @include adaptive ("padding-right", 30, 15, 0);
+  &:hover {
+    color: var(--white);
+  }
+}
+
+.game-play {
+  font-style: normal;
+  font-weight: 400;
+  @include adaptiv-font(36, 24);
+  @include adaptive ("line-height", 41, 29, 0);
+  text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(94.95deg, #AD3421 1.96%, #3A0D06 100%);
+  border-radius: 26px;
+  @include adaptive ("padding-top", 15, 8, 0);
+  @include adaptive ("padding-bottom", 15, 8, 0);
+  @include adaptive ("padding-left", 56, 25, 0);
+  @include adaptive ("padding-right", 56, 25, 0);
+  &:hover {
+    color: var(--white);
+  }
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hd__link {
+    &:hover {
+      color: #A2A2A2;
+      transform: scale(.9);
+    }
+  }
+  .hd__log {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .hd__sign {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .hr__button {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .ab__link {
+    &:hover {
+      transform: scale(.9);
+      color: var(--white);
+    }
+  }
+  .gm__link {
+    &:hover {
+      transform: scale(.9);
+      color: var(--white);
+    }
+  }
+  .game__link {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .gm-ab__link {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .ft__link {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+
+  .log__btn {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .log__input {
+    &:hover {
+      border-color: #CB9F54;
+    }
+  }
+  .popup-log__exit {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .reg__btn {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .reg__input {
+    &:hover {
+      border-color: #CB9F54;
+    }
+  }
+  .reg__span {
+    & a {
+      &:hover {
+        color: var(--white);
+      }
+    }
+  }
+  .popup-reg__exit {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .popup__btns-accept {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+  .popup__btns-clos {
+    &:hover {
+      transform: scale(.9);
+    }
+  }
+}

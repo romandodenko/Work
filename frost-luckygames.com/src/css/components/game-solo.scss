@@ -1,0 +1,126 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.game-solo {
+  @include adaptive ("padding-top", 250, 100, 0);
+
+  &__top {
+    display: grid;
+    grid-template: auto / repeat(2, 1fr);
+    @include adaptive ("column-gap", 80, 30, 0);
+    row-gap: 30px;
+    margin-bottom: 45px;
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__image {
+    text-align: center;
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  &__title {
+    color: #431480;
+    text-align: left;
+  }
+
+  &__list {
+    padding-top: 10px;
+  }
+
+  &__item {
+    font-family: 'Comfortaa';
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(24, 14);
+    @include adaptive ("line-height", 43, 28, 0);
+    padding-left: 25px;
+    color: #1a49cd;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: #1a49cd;
+      @include adaptive ("width", 10, 7, 0);
+      @include adaptive ("height", 10, 7, 0);
+      border-radius: 100px;
+    }
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__bottom {
+    background-color: #5175DB;
+    @include adaptive ("padding-top", 75, 30, 0);
+    @include adaptive ("padding-bottom", 75, 30, 0);
+  }
+
+  &__text {
+    @include adaptive ("padding-top", 30, 15, 0);
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(30, 16);
+    @include adaptive ("line-height", 54, 28, 0);
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__wrapper-link {
+    text-align: center;
+  }
+
+  &__link {
+    transition: background-color .2s ease-in-out, border-color .2s ease-in-out;
+  }
+}

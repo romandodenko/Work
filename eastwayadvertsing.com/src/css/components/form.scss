@@ -1,0 +1,311 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1275;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.form-spec {
+
+  &__container {
+    max-width: 1920px;
+    padding: 0;
+    display: grid;
+    grid-template: auto / repeat(2, 1fr);
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__wrapper-form {
+    background-image: url(../../img/form-img.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    @include adaptive ("padding-top", 170, 70, 0);
+    @include adaptive ("padding-bottom", 170, 70, 0);
+    padding-left: 30px;
+    @include adaptive ("padding-right", 70, 30, 0);
+    @media (max-width: 768px) {
+      padding-bottom: 25px;
+    }
+    @media (max-width: 600px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  &__body-form {
+    width: 500px;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 500;
+    @include adaptiv-font(48, 28);
+    @include adaptive ("line-height", 59, 39, 0);
+    color: var(--white);
+    @include adaptive ("margin-bottom", 80, 50, 0);
+  }
+
+  &__label:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 50px;
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 20, 18, 0);
+    color: var(--white);
+    padding: 0 15px;
+    background-color: transparent;
+    border-bottom: 1px solid #FFFFFF;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 400;
+      @include adaptiv-font(16, 14);
+      @include adaptive ("line-height", 20, 18, 0);
+      color: var(--white);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+
+    &:focus-visible {
+      border-color: var(--black);
+
+      &::placeholder {
+        color: var(--black)
+      }
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 20, 18, 0);
+    color: var(--white);
+    padding: 0 15px;
+    background-color: transparent;
+    height: 150px;
+    border-bottom: 1px solid #FFFFFF;
+    transition: border-color .2s ease-in-out;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 400;
+      @include adaptiv-font(16, 14);
+      @include adaptive ("line-height", 20, 18, 0);
+      color: var(--white);
+      padding: 3px 0;
+      transition: color .2s ease-in-out;
+    }
+
+    &:focus-visible {
+      border-color: var(--black);
+
+      &::placeholder {
+        color: var(--black)
+      }
+    }
+  }
+
+  &__button {
+    @include adaptive ("margin-top", 80, 40, 0);
+    position: relative;
+    font-style: normal;
+    font-weight: 500;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 20, 18, 0);
+    color: var(--white);
+    @include adaptive ("padding-top", 20, 10, 0);
+    @include adaptive ("padding-bottom", 20, 10, 0);
+    @include adaptive ("padding-left", 30, 15, 0);
+    @include adaptive ("padding-right", 85, 60, 0);
+    border: 1px solid var(--white);
+    transition: opacity .2s ease-in-out;
+    align-self: flex-start;
+    background-color: transparent;
+
+    &:before {
+      content: "";
+      position: absolute;
+      @include adaptive ("top", 22, 14, 0);
+      @include adaptive ("right", 35, 20, 0);
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid var(--white);
+      border-bottom: 2px solid var(--white);
+      transform: rotate(-45deg);
+      transition: opacity .2s ease-in-out;
+    }
+  }
+
+  &__spec {
+    background-color: #000201;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    @include adaptive ("padding-top", 170, 70, 0);
+    @include adaptive ("padding-bottom", 170, 70, 0);
+    @include adaptive ("padding-left", 70, 30, 0);
+    padding-right: 30px;
+    @media (max-width: 768px) {
+      padding-top: 25px;
+    }
+    @media (max-width: 600px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template: auto / repeat(3, minmax(0, 194px));
+    gap: 15px;
+    @media (max-width: 1070px) {
+      grid-template-columns: 1fr;
+      justify-content: space-between;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+
+  &__item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--white);
+    padding: 60px 15px 15px 15px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--white);
+      border-radius: 60px;
+      z-index: 3;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: linear-gradient(180deg, #61B3C9 0%, #074D88 100%);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+  }
+
+  &__subtitle {
+    font-style: normal;
+    font-weight: 500;
+    @include adaptiv-font(20, 18);
+    @include adaptive ("line-height", 24, 22, 0);
+    color: var(--white);
+    margin-bottom: 15px;
+  }
+
+  &__text {
+    flex: 1 1 auto;
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(16, 14);
+    @include adaptive ("line-height", 20, 18, 0);
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  &__price-old {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: line-through;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  &__price-new {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    @include adaptiv-font(24, 18);
+    @include adaptive ("line-height", 29, 23, 0);
+    color: var(--white);
+  }
+
+  &__free {
+    font-style: normal;
+    font-weight: 500;
+    @include adaptiv-font(24, 18);
+    @include adaptive ("line-height", 29, 23, 0);
+    color: var(--white);
+  }
+}
