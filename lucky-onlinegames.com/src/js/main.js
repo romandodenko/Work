@@ -10,14 +10,10 @@ import * as popup from './modules/popup.js'
 
 popup.popup()
 
-import * as gsapScript from './modules/gsap.js'
-
-gsapScript.gsapScript()
-
-// import * as validate from './modules/validate.js'
-
-// validate.validate()
-
 import * as smooth from './modules/smooth-anchor-v2.js'
 
 smooth.smooth()
+
+import * as text from './modules/text.js'
+
+text.text()

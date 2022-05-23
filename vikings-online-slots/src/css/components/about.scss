@@ -1,0 +1,98 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.about {
+  @include adaptive ("margin-bottom", 60, 30, 0);
+
+  &__title {
+    font-family: 'Langar';
+font-style: normal;
+font-weight: 400;
+@include adaptiv-font(83, 42);
+@include adaptive ("line-height", 90, 52, 0);
+text-transform: uppercase;
+color: #D93223;
+@include adaptive ("margin-bottom", 40, 20, 0);
+  }
+
+  &__bottom {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 68px 0 0 43px;
+    background: linear-gradient(101.98deg, #0E5472 0.93%, #24ADE8 100%);
+    border-radius: 40px;
+    width: 90%;
+    min-height: 569px;
+    @media (max-width: 1270px) {
+      width: 100%;
+    }
+    @media (max-width: 1178px) {
+      flex-direction: column;
+      padding-right: 43px;
+    }
+    @media (max-width: 768px) {
+      padding: 25px 15px 0 15px;
+    }
+  }
+
+  &__text {
+    width: 50%;
+    font-style: normal;
+font-weight: 400;
+@include adaptiv-font(30, 20);
+@include adaptive ("line-height", 45, 35, 0);
+color: var(--white);
+padding-bottom: 41px;
+@media (max-width: 1178px) {
+  width: 100%;
+}
+  }
+
+  &__image {
+    position: absolute;
+    bottom: 0;
+    right: -50px;
+    @media (max-width: 1270px) {
+      right: 0;
+    }
+    @media (max-width: 1178px) {
+      position: static;
+      text-align: center;
+    }
+    & img { 
+      max-width: 100%;
+    }
+  }
+}

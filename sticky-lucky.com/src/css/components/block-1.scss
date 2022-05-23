@@ -1,0 +1,139 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.block-1 {
+  background-image: url(../../img/block-1/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 150px;
+  height: 100vh;
+  padding-bottom: 100px;
+  @media (max-width: 1024px) {
+   background-image: url(../../img/block-1/background_768.png);
+   @include adaptive ("padding-top", 150, 80, 0);
+   @include adaptive ("padding-bottom", 100, 79, 0);
+  }
+  @media (max-width: 600px) {
+    background-image: url(../../img/block-1/background_320.png);
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    @media (max-width: 880px) {
+  justify-content: flex-start;
+    }
+  }
+
+  &__body {
+    max-width: 572px;
+    padding: 30px 0;
+    @media (max-width: 880px) {
+      max-width: 405px;
+    }
+  }
+
+  &__title {
+    display: inline-flex;
+    flex-direction: column;
+    font-family: 'Impact';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 83px;
+    display: flex;
+    color: #D37E2F;
+    margin-bottom: 64px;
+    @media (max-width: 1024px) {
+      @include adaptiv-font(68, 32);
+      @include adaptive ("line-height", 83, 45, 0);
+    }
+
+    & span {
+      display: inline-block;
+      font-style: normal;
+    font-weight: 400;
+    font-size: 41px;
+    line-height: 64px;
+    color: #CA913C;
+    @media (max-width: 1024px) {
+      @include adaptiv-font(41, 20);
+      @include adaptive ("line-height", 64, 33, 0);
+    }
+    }
+  }
+
+  &__wrapper-link {
+  }
+
+  &__link {
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 61px;
+    line-height: 96px;
+    color: #2D1D07;
+    background-color: #986821;
+    border-radius: 15px;
+    padding: 5px 92px;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    @media (max-width: 1024px) {
+      @include adaptiv-font(61, 28);
+      @include adaptive ("line-height", 96, 41, 0);
+      @include adaptive ("padding-left", 92, 42, 0);
+      @include adaptive ("padding-right", 92, 42, 0);
+    }
+    @media (any-hover: hover) {
+    &:hover {
+      color: var(--white);
+      background-color: #D37E2F;
+    }
+    }
+    &:active {
+      color: var(--white);
+      background-color: #D37E2F;
+    }
+  }
+}

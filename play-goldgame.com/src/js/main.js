@@ -13,7 +13,3 @@ dynamic.dynamic()
 import * as smooth from './modules/smooth-anchor-v2.js'
 
 smooth.smooth()
-
-import * as form from './modules/form.js'
-
-form.form()

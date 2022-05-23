@@ -1,0 +1,405 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.cockie {
+  height: 100%;
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    max-width: 700px;
+    transform: translate(-50%, -50%);
+    background-color: var(--burbund);
+    border-radius: 20px;
+    z-index: 2;
+    padding: 30px;
+
+    @media (max-width: 768px) {
+      width: 95%;
+      max-width: none;
+    }
+  }
+
+  &__text {
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 32, 24, 0);
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 15px;
+  }
+
+  &__wrapper-checkbox {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__checkbox {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+
+    &:checked {
+      &+.cockie__span {
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__span {
+    display: inline-block;
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 32, 24, 0);
+    font-weight: 400;
+    color: var(--white);
+    padding-left: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      @include adaptive ("top", 7, 3, 0);
+      left: 0;
+      width: 15px;
+      height: 15px;
+      border: 1px solid var(--white);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      @include adaptive ("top", 9, 5, 0);
+      left: 5px;
+      width: 5px;
+      height: 8px;
+      border-right: 1px solid var(--white);
+      border-bottom: 1px solid var(--white);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    text-transform: uppercase;
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 32, 24, 0);
+    font-weight: 400;
+    color: var(--burbund);
+    background-color: var(--gold);
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-right: 15px;
+    border: 1px solid transparent;
+    transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: scaleX(1.05);
+      }
+    }
+
+    &:active {
+      transform: scaleX(1.05);
+    }
+  }
+
+  &__btn {
+    text-transform: uppercase;
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 32, 24, 0);
+    font-weight: 400;
+    color: var(--burbund);
+    background-color: var(--gold);
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: scaleX(1.05);
+      }
+    }
+
+    &:active {
+      transform: scaleX(1.05);
+    }
+  }
+}
+
+.back {
+
+  &__item {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: blur(4px);
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .5);
+    }
+  }
+}
+
+.start-cockie {
+
+  &__descr {
+    position: relative;
+    max-width: 800px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+
+  &__text {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link {
+    display: inline-block;
+    text-transform: uppercase;
+    @include adaptiv-font(24, 16);
+    @include adaptive ("line-height", 32, 24, 0);
+    font-weight: 400;
+    color: var(--burbund);
+    background-color: var(--gold);
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out, opacity .2s ease-in-out, pointer-events .2s ease-in-out;
+
+    &:active {
+      color: #bf2e00;
+      background-color: transparent;
+      border-color: #c4700e;
+    }
+  }
+
+  &__wrapper-cockie {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  &__body {
+    padding: 50px 0 20px 20px;
+    @include adaptive ("padding-right", 20, 10, 0);
+    position: relative;
+    max-width: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--burbund);
+    border-radius: 20px;
+
+    @media (max-width: 1024px) {
+      max-width: none;
+      width: 95%;
+    }
+  }
+
+  &__scroll {
+    height: 500px;
+    @include adaptive ("padding-right", 20, 10, 0);
+  }
+
+  &__exit {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      transform: rotate(45deg);
+      transition: background-color .2s ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      transform: rotate(-45deg);
+      transition: background-color .2s ease-in-out;
+    }
+
+    &:active {
+      &::before {
+        background-color: #bf2e00;
+      }
+
+      &::after {
+        background-color: #bf2e00;
+      }
+    }
+  }
+
+  &__wrapper-link {
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  & h1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    @include adaptiv-font(38, 22);
+    @include adaptive ("line-height", 41, 26, 0);
+    text-transform: uppercase;
+    color: var(--gold);
+    @include adaptive ("margin-bottom", 60, 30, 0);
+  }
+
+  & h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    @include adaptiv-font(30, 18);
+    @include adaptive ("line-height", 33, 21, 0);
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  & p {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(20, 16);
+    @include adaptive ("line-height", 23, 19, 0);
+    text-transform: uppercase;
+    color: var(--white);
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  & ul {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  & li {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(18, 14);
+    @include adaptive ("line-height", 21, 18, 0);
+    text-transform: uppercase;
+    color: var(--white);
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+}
+
+.start-cockie-wrapper-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+
+.link-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

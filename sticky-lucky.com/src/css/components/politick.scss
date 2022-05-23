@@ -1,0 +1,117 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.politick {
+  padding-top: 150px;
+  padding-bottom: 100px;
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 150, 70, 0);
+    @include adaptive ("padding-bottom", 100, 50, 0);
+  }
+  & h1 {
+    font-family: 'Impact';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 41px;
+    line-height: 51px;
+    color: #D37E2F;
+    margin-bottom: 30px;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(41, 26);
+      @include adaptive ("line-height", 51, 36, 0);
+    }
+
+  }
+  & h2 {
+    font-family: 'Impact';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 31px;
+    line-height: 41px;
+    color: #D37E2F;
+    margin-bottom: 30px;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(31, 24);
+      @include adaptive ("line-height", 41, 34, 0);
+    }
+
+  }
+  & p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 34px;
+    color: #D37E2F;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(24, 18);
+      @include adaptive ("line-height", 34, 28, 0);
+    }
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+  & ul {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+  & li {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #D37E2F;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(20, 16);
+      @include adaptive ("line-height", 30, 26, 0);
+    }
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+}

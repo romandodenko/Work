@@ -1,0 +1,171 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.games {
+  padding: 100px 0;
+  background-color: #024059;
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 100, 30, 0);
+    @include adaptive ("padding-bottom", 100, 30, 0);
+  }
+
+  &__container {}
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    width: 452px;
+    box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+    border-radius: 25px;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  &__image {
+    overflow: hidden;
+    border-radius: 41px 41px 0 0;
+    background: rgba(255, 255, 255, 0.37);
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  &__body {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.37);
+    border-radius: 0 0 25px 25px;
+  }
+
+  &__namegame {
+    display: inline-block;
+    font-family: 'Lalezar';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 71px;
+    color: #FFFFFF;
+    transition: opacity .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: .5;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(45, 22);
+      @include adaptive ("line-height", 71, 32, 0);
+    }
+  }
+
+  &__wrapper-link {
+    text-align: center;
+  }
+
+  &__play {
+    display: inline-block;
+    font-family: 'Lalezar';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 44px;
+    color: #FFFFFF;
+    padding: 19px 39px;
+    background: #024059;
+    box-shadow: 0px 4px 4px rgba(248, 248, 248, 0.56);
+    border-radius: 12px;
+    transition: box-shadow .2s ease-in-out;
+    @media (any-hover: hover) {
+    &:hover {
+    box-shadow: none;
+    }
+    }
+    @media (max-width: 1024px) {
+      @include adaptiv-font(28, 16);
+      @include adaptive ("line-height", 44, 24, 0);
+      @include adaptive ("padding-top", 19, 13, 0);
+      @include adaptive ("padding-right", 39, 24, 0);
+      @include adaptive ("padding-bottom", 19, 13, 0);
+      @include adaptive ("padding-left", 39, 24, 0);
+    }
+  }
+}
+
+.black {
+  background-color: black;
+}
+
+.game-play {
+  padding: 150px 0 100px 0;
+  background-color: #012340;
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 150, 100, 0);
+    @include adaptive ("padding-bottom", 100, 70, 0);
+  }
+  &__title {
+    font-family: 'Lalezar';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    text-align: center;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    @media (max-width: 1024px) {
+      @include adaptiv-font(36, 26);
+      @include adaptive ("line-height", 46, 36, 0);
+    }
+  }
+  &__iframe {
+    width: 100%;
+    height: 610px;
+  }
+}

@@ -1,0 +1,171 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.games {
+  @include adaptive ("margin-bottom", 60, 30, 0);
+
+  &__title {
+    font-family: 'Langar';
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(83, 42);
+    @include adaptive ("line-height", 90, 52, 0);
+    text-transform: uppercase;
+    color: #D93223;
+    @include adaptive ("margin-bottom", 40, 20, 0);
+  }
+
+  &__list {
+    display: grid;
+    grid-template: auto / repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    @media (max-width: 600px) {
+      grid-template: auto / repeat(auto-fit, minmax(270px, 1fr));
+    }
+  }
+
+  &__item {
+    background: linear-gradient(284.32deg, #0E5472 0%, #33B5EC 100%);
+    border-radius: 25px;
+  }
+
+  &__image {
+    border-radius: 25px;
+
+    & img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     
+      border-radius: 25px;
+    }
+  }
+
+  &__descr {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 15px;
+    padding: 18px 14px;
+  }
+
+  &__name {
+    width: 45%;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(27, 20);
+    @include adaptive ("line-height", 40, 30, 0);
+    color: var(--white);
+    transition: opacity .2s ease-in-out;
+    @media (max-width: 768px) {
+      width: 55%;
+    }
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: .6;
+      }
+    }
+  }
+
+  &__play {
+    width: 40%;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    @include adaptiv-font(20, 16);
+    @include adaptive ("line-height", 30, 26, 0);
+    text-transform: uppercase;
+    color: var(--white);
+    transition: opacity .2s ease-in-out;
+    background-color: #F27141;
+    text-align: center;
+    border-radius: 14px;
+    @include adaptive ("padding-top", 13, 8, 0);
+    @include adaptive ("padding-right", 41, 25, 0);
+    @include adaptive ("padding-bottom", 13, 8, 0);
+    @include adaptive ("padding-left", 41, 25, 0);
+
+    @media (any-hover: hover) {
+      &:hover {
+        opacity: .6;
+      }
+    }
+  }
+}
+
+.game-play {
+  margin-top: 150px;
+  @media (max-width: 1024px) {
+    margin-top: 120px;
+  }
+  @media (max-width: 768px) {
+    @include adaptive ("margin-top", 120, 70, 0);
+  }
+  @include adaptive ("margin-bottom", 60, 30, 0);
+
+  &__container {
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 400;
+    @include adaptiv-font(42, 22);
+    @include adaptive ("line-height", 52, 32, 0);
+    text-transform: uppercase;
+    color: #D93223;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__iframe {
+    & iframe {
+      width: 100%;
+      height: 609px;
+      @media (max-width: 768px) {
+        height: 350px;
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.advantages {
+  overflow: hidden;
+  padding: 91px 0;
+
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-top", 91, 30, 0);
+    @include adaptive ("padding-bottom", 91, 30, 0);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+
+  &__body {
+    max-width: 571px;
+    @media (max-width: 1024px) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__strong-text {
+    font-family: 'Impact';
+font-style: normal;
+font-weight: 400;
+font-size: 48px;
+line-height: 54px;
+text-transform: uppercase;
+color: #D37E2F;
+margin-bottom: 10px;
+@include adaptiv-font(48, 24);
+@include adaptive ("line-height", 54, 36, 0);
+  }
+
+  &__text {
+    font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 36px;
+color: #E2E2E2;
+@media (max-width: 1024px) {
+  @include adaptiv-font(32, 18);
+  @include adaptive ("line-height", 36, 24, 0);
+}
+  }
+
+  &__image {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(50% 50% at 50% 50%, #AA6321 0%, rgba(152, 104, 33, 0) 100%);
+      z-index: 1;
+    }
+    & img {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+    }
+  }
+}
+
