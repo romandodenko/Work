@@ -1,0 +1,377 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1204;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.header {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 10px 0 77px 0;
+  // margin-bottom: 23px;
+
+  @media (max-width: 1200px) {
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 623px) {
+    @include adaptive ("padding-bottom", 60, 20, 0);
+    // background-position: inherit;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  &__logo {
+    display: block;
+
+    & img {
+      max-width: 202px;
+      height: 138px;
+      @media (max-width: 1200px) {
+        width: 135px;
+        height: 93px;
+      }
+      @media (max-width: 623px) {
+        width: 83px;
+        height: 59px;
+      }
+    }
+  }
+
+  &__title {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 59px;
+    text-transform: uppercase;
+    color: var(--white);
+
+    & span {
+      display: inline;
+      width: max-content;
+    }
+
+    @media (max-width: 1200px) {
+      font-size: 29px;
+      line-height: 43px;
+    }
+
+    @media (max-width: 623px) {
+      font-size: 21px;
+      line-height: 31px;
+    }
+  }
+
+  &__bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+
+    }
+  }
+}
+
+.header-cart {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 923px;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(90.08deg, #C7CCF1 0.06%, #FFFFFF 99.93%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  @media (max-width: 991px) {
+    max-width: 95%;
+    top: 10px;
+  }
+  @media (max-width: 576px) {
+    padding: 6px;
+    max-width: 93%;
+    top: 0;
+    left: 49%;
+  }
+  &__top {
+    @media (max-width: 575px) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__tranding {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    font-family: 'JejuGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--white);
+    background-color: #124694;
+    padding: 8px 5px;
+    border-radius: 8px 0 20px 0;
+
+    @media (max-width: 991px) {
+      font-size: 11px;
+      line-height: 12px;
+    }
+    @media (max-width: 576px) {
+      width: 46%;
+    }
+    @media (max-width: 400px) {
+      font-size: 9px;
+      line-height: 10px;
+      padding: 3px 5px;
+    }
+  }
+
+  &__wrapper-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 202px;
+    height: 74px;
+    margin-top: 20px;
+    
+    overflow: hidden;
+  }
+
+  &__logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    & picture {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+      height: 100%;
+    }
+
+    & img {
+      max-width: 100%;
+      max-height: 100%;
+      object-position: center;
+      object-fit: contain;
+    }
+  }
+
+  &__middle {}
+
+  &__title {
+    font-family: 'JejuGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #434343;
+    margin-bottom: 5px;
+    @media (max-width: 991px) {
+      font-size: 14px;
+    line-height: 17px;
+    }
+    @media (max-width: 576px) {
+      font-size: 11px;
+    line-height: 12px;
+    }
+  }
+
+  &__bns {}
+
+  &__bonus {}
+
+  &__bonus-icon {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 15px;
+    & svg {
+      fill: #ffd709;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 5px;
+    }
+  }
+
+  &__bonus-text {
+    font-family: 'JejuGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #ffd709;
+    text-shadow: 0 0 7px #201600f2;
+    @media (max-width: 991px) {
+      font-size: 18px;
+    line-height: 20px;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 0;
+    }
+    @media (max-width: 400px) {
+      font-size: 16px;
+    line-height: 18px;
+    }
+  }
+
+  &__plus {
+    font-family: 'JejuGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 29px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #3C8C53;
+    padding-bottom: 9px;
+    @media (max-width: 991px) {
+      font-size: 23px;
+    line-height: 23px;
+    padding-bottom: 14px;
+    }
+    @media (max-width: 576px) {
+      padding-bottom: 11px;
+    }
+  }
+
+  &__spin {}
+
+  &__spin-icon {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 15px;
+    & svg {
+      fill: #ffd709;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 5px;
+    }
+  }
+
+  &__spin-text {
+    font-family: 'JejuGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #ffd709;
+    text-shadow: 0 0 7px #201600f2;
+
+    @media (max-width: 991px) {
+      font-size: 18px;
+    line-height: 20px;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 0;
+    }
+    @media (max-width: 400px) {
+      font-size: 16px;
+    line-height: 18px;
+    }
+  }
+
+  &__get {
+    width: 100%;
+    font-family: 'Khula';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    text-transform: uppercase;
+    background-color: #3C8C53;
+    border-radius: 5px;
+    color: #FFFFFF;
+    padding: 25.5px 10px 22.5px 10px;
+    transition: background-color .2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--white);
+        background-color: #1e5c30;
+      }
+    }
+    @media (max-width: 991px) {
+      font-size: 16px;
+      padding: 17px 10px 17px 10px;
+    }
+    @media (max-width: 576px) {
+      font-size: 13px;
+    padding: 11px 10px 11px 10px;
+    }
+    @media (max-width: 400px) {
+      font-size: 10px;
+      padding: 8px 10px 8px 10px;
+    }
+  }
+}
+
+.header.scroll .header-cart {
+  position: fixed;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

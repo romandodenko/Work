@@ -1,0 +1,211 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1795;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 170px 0 170px 0;
+  background-image: url(../../img/hero/bg.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 100px;
+  @media (max-width: 1200px) {
+    padding: 100px 0 50px 0;
+  }
+  @media (max-width: 1024px) {
+    @include adaptive ("margin-bottom", 100, 30, 0);
+  }
+  @media (max-width: 600px) {
+    padding-top: 50px;
+    padding-bottom: 0;
+  }
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top:80px;
+    right: 0;
+    z-index: 1;
+
+    & img {
+      max-width: 100%;
+    }
+
+    @media (max-width: 1615px) {
+      max-width: 600px;
+      top: 100px;
+    }
+
+    @media (max-width: 1405px) {
+      max-width: 500px;
+    }
+
+    @media (max-width: 1200px) {
+      max-width: 400px;
+    }
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__body {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__descr {
+    max-width: 775px;
+    padding: 50px 0;
+
+    @media (max-width: 1335px) {
+      max-width: 650px;
+    }
+    @media (max-width: 1200px) {
+      max-width: 600px;
+    }
+    @media (max-width: 1024px) {
+      max-width: 100%;
+    }
+  }
+
+  &__title {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 65px;
+    line-height: 65px;
+    color: var(--white);
+    margin-bottom: 30px;
+
+    @media (max-width: 1560px) {
+      font-size: 55px;
+      line-height: 55px;
+    }
+
+    @media (max-width: 1275px) {
+      font-size: 45px;
+      line-height: 45px;
+    }
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(45, 26);
+      @include adaptive ("line-height", 45, 30, 0);
+    }
+    @media (max-width: 600px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 27px;
+    line-height: 37px;
+    color: var(--white);
+    margin-bottom: 30px;
+    @media (max-width: 1560px) {
+      font-size: 25px;
+      line-height: 35px;
+    }
+    @media (max-width: 1275px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
+    @media (max-width: 1024px) {
+      @include adaptiv-font(20, 16);
+      @include adaptive ("line-height", 30,21 , 0);
+    }
+    @media (max-width: 600px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 32px;
+    color: var(--black);
+    padding: 29px 179px;
+    background-color: var(--white);
+    border-radius: 7px;
+    transition: transform .2s ease-in-out;
+    @media (any-hover: hover) {
+    &:hover {
+      transform: translateX(3px);
+    }
+    }
+    @media (max-width: 1560px) {
+      padding: 29px 120px;
+    }
+
+    @media (max-width: 1275px) {
+      font-size: 18px;
+      line-height: 28px;
+      padding: 20px 100px;
+    }
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(18, 16);
+      @include adaptive ("line-height", 28, 26, 0);
+      @include adaptive ("padding-top", 20, 15, 0);
+      @include adaptive ("padding-bottom", 20, 15, 0);
+      @include adaptive ("padding-left", 100, 60, 0);
+      @include adaptive ("padding-right", 100, 60, 0);
+    }
+  }
+
+}

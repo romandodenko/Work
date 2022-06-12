@@ -1,0 +1,125 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  } @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  } @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.footer {
+  padding: 30px 0;
+  background-color: #161616;
+  @media (max-width: 1024px) {
+    padding: 20px 0;
+  }
+  &__container {
+    display: flex;
+  justify-content: space-between;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  }
+
+  &__left {
+    @media (max-width: 1024px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__wrapper-logo {
+    margin-bottom: 15px;
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  &__text {
+    font-family: 'Kufam';
+font-style: normal;
+font-weight: 400;
+font-size: 27px;
+line-height: 35px;
+color: #FFFFFF;
+max-width: 400px;
+@media (max-width: 1024px) {
+  @include adaptiv-font(27, 18);
+  @include adaptive ("line-height", 35, 25, 0);
+  text-align: center;
+}
+  }
+
+  &__right {
+  }
+
+  &__title {
+    font-family: 'KronaOne';
+font-style: normal;
+font-weight: 400;
+font-size: 31px;
+line-height: 39px;
+color: #E48702;
+margin-bottom: 20px;
+text-align: right;
+@media (max-width: 1024px) {
+  @include adaptiv-font(31, 20);
+  @include adaptive ("line-height", 39, 27, 0);
+}
+  }
+
+  &__lst {
+    text-align: right;
+  }
+
+  &__itm {
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    font-family: 'Kufam';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 35px;
+    color: #FFFFFF;
+    transition: color .2s ease-in-out;
+    @media (max-width: 1024px) {
+      @include adaptiv-font(27, 17);
+      @include adaptive ("line-height", 35, 25, 0);
+    }
+    @media (any-hover: hover) {
+      &:hover {
+        color: #e48702;
+      }
+    }
+  }
+}

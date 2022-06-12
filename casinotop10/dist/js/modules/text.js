@@ -1,6 +1,6 @@
 "use strict"
 
-
+export function text() {
   const btn = document.querySelector(".btn-1");
   const text = document.querySelector(".text-1")
   const btn2 = document.querySelector(".btn-2");
@@ -48,3 +48,4 @@
     text9.classList.toggle("text-active")
   })
 
+}

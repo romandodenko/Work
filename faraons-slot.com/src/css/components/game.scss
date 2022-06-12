@@ -1,0 +1,208 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.game {
+  padding-bottom: 100px;
+
+  @media (max-width: 1024px) {
+    @include adaptive ("padding-bottom", 100, 50, 0);
+  }
+
+  &__container {}
+
+  &__list {
+    display: grid;
+    grid-template: auto / repeat(auto-fit, minmax(470px, 1fr));
+    gap: 35px 20px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      row-gap: 15px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 450px;
+    border-radius: 20px;
+
+    @media (max-width: 768px) {
+      min-height: 223px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0) 100%);
+      border-radius: 20px;
+      z-index: 1;
+    }
+  }
+
+  &__links {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px 25px 15px;
+  }
+
+  &__name {
+    display: inline-block;
+    font-family: 'KronaOne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 41px;
+    color: #FFFFFF;
+    margin-right: 30px;
+    transition: color .2s ease-in-out;
+
+    @media (max-width: 1305px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(24, 14);
+      @include adaptive ("line-height", 32, 21, 0);
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #e48702;
+      }
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kufam';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 34px;
+    color: #FFFFFF;
+    background: linear-gradient(96.82deg, #E48702 2.07%, rgba(255, 10, 0, 0.53) 100%);
+    border-radius: 8px;
+    padding: 14px 23px;
+    white-space: nowrap;
+    transition: transform .2s ease-in-out;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(26, 14);
+      @include adaptive ("line-height", 34, 21, 0);
+      @include adaptive ("padding-top", 14, 9, 0);
+      @include adaptive ("padding-bottom", 14, 9, 0);
+      @include adaptive ("padding-left", 23, 16, 0);
+      @include adaptive ("padding-right", 23, 16, 0);
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: translateY(2px);
+      }
+    }
+  }
+}
+
+.mysterious-egypt {
+  background-image: url(../../img/game/mysterious-egypt.png);
+}
+
+.valley-of-the-gods {
+  background-image: url(../../img/game/valley-of-the-gods2.png);
+}
+
+.ankh-of-anubis {
+  background-image: url(../../img/game/anubis.png);
+}
+
+.golden-glyph {
+  background-image: url(../../img/game/golden-glyph.png);
+}
+
+.play {
+  padding: 50px 0;
+  &__container {}
+
+  &__title {
+    font-family: 'KronaOne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 38px;
+    color: #E48702;
+    margin-bottom: 30px;
+    text-align: center;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(28, 20);
+      @include adaptive ("line-height", 38, 30, 0);
+    }
+  }
+
+  &__iframe {
+    & iframe {
+      width: 100%;
+      height: 610px;
+
+      @media (max-width: 768px) {
+        height: 350px;
+      }
+    }
+  }
+}

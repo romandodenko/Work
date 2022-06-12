@@ -1,0 +1,128 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.hero {
+  background-image: url(../../img/hero/hero-1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 140px 0;
+
+  @media (max-width: 1024px) {
+    background-image: url(../../img/hero/hero-2.jpg);
+    @include adaptive ("padding-top", 140, 90, 0);
+    @include adaptive ("padding-bottom", 140, 90, 0);
+  }
+
+  @media (max-width: 600px) {
+    background-image: url(../../img/hero/hero-3.jpg);
+  }
+
+  &__body {
+    max-width: 560px;
+
+    @media (max-width: 1024px) {
+      @include adaptive ("max-width", 560, 360, 0);
+    }
+  }
+
+  &__span {
+    display: inline-block;
+    font-family: 'Kufam';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 34px;
+    color: #FFFFFF;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(26, 14);
+      @include adaptive ("line-height", 34, 28, 0);
+    }
+  }
+
+  &__title {
+    font-family: 'KronaOne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 51px;
+    line-height: 64px;
+    color: #E48702;
+    margin-bottom: 40px;
+
+    @media (max-width: 1024px) {
+      @include adaptiv-font(51, 28);
+      @include adaptive ("line-height", 64, 38, 0);
+      @include adaptive ("margin-bottom", 40, 20, 0);
+    }
+  }
+
+  &__wrapper-link {}
+
+  &__link {
+    display: inline-block;
+    font-family: 'KronaOne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #FFFFFF;
+    padding: 27px 47px;
+    background: linear-gradient(94.36deg, #E48702 0%, rgba(255, 10, 0, 0.53) 100%);
+    border-radius: 8px;
+    transition: transform .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: translateY(2px);
+      }
+    }
+    @media (max-width: 1024px) {
+      @include adaptiv-font(24, 16);
+      @include adaptive ("line-height", 30, 24, 0);
+      @include adaptive ("padding-top", 27, 18, 0);
+      @include adaptive ("padding-bottom", 27, 18, 0);
+      @include adaptive ("padding-left", 47, 27, 0);
+      @include adaptive ("padding-right", 47, 27, 0);
+    }
+  }
+}
