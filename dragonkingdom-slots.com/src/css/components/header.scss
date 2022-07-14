@@ -1,0 +1,243 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.header {
+  padding: 15px 0;
+  background-color: #a52a2a;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__menu {
+    @media (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #a52a2a;
+      z-index: 100;
+      @include adaptive ("padding", 30, 15, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: auto;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+    }
+  }
+
+  &__exit-menu {
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+
+    @media (max-width: 1024px) {
+      display: block;
+      @include adaptive ("top", 30, 15, 0);
+      @include adaptive ("right", 30, 15, 0);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #FFFFFF;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__menu-logo {
+    display: none;
+    text-align: center;
+    margin-bottom: 100px;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  &__wrapper-logo {
+    text-align: center;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    font-size: 26px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  &__span-logo {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-right: 5px;
+    border-radius: 25px;
+    overflow: hidden;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+
+  &__span {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  &__span-one {
+    font-size: 16px;
+    line-height: 16px;
+    color: #ffffff;
+  }
+  &__span-two {
+    font-size: 14px;
+    line-height: 14px;
+    color: rgb(255, 208, 0);
+  }
+}
+
+.nav {
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      row-gap: 40px;
+    }
+  }
+
+  &__link {
+    font-size: 26px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-style: normal;
+    transition: color .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #808000;
+      }
+    }
+  }
+}
+
+
+.burger {
+  display: none;
+  position: relative;
+  @include adaptive ("width", 72, 45, 0);
+  @include adaptive ("height", 26, 19, 0);
+  background-color: transparent;
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #FFFFFF;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #FFFFFF;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #FFFFFF;
+  }
+}
+
+.menu-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

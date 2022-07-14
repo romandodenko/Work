@@ -1,0 +1,200 @@
+.events {
+  margin-bottom: 77px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 55px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 35px;
+  }
+
+  &__list {
+    gap: 20px;
+    grid-template: auto / repeat(auto-fit, minmax(400px, 1fr));
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    position: relative;
+    height: 340px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    @media (max-width: 1024px) {
+      height: 248px;
+    }
+    @media (max-width: 600px) {
+      height: 251px;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: rgba(0, 0, 0, .3);
+    }
+  }
+
+  &__descr {
+    position: relative;
+    z-index: 2;
+    padding: 20px 5px;
+    background: linear-gradient(360deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0) 100%);
+    @media (max-width: 1024px) {
+      padding: 15px 5px;
+    }
+  }
+
+  &__wrapper-left {
+    padding-right: 5px;
+  }
+
+  &__left {}
+
+  &__better {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 11px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    margin-left: 60px;
+    @media (max-width: 1024px) {
+      margin-left: 57px;
+      margin-bottom: 5px;
+    }
+    @media (max-width: 600px) {
+      margin-left: 46px;
+    }
+    @media (max-width: 380px) {
+      text-align: center;
+      margin-left: 0;
+    }
+  }
+
+  &__wrapper-link {}
+
+  &__link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    transition: color .2s ease-in-out;
+
+    & svg {
+      flex-shrink: 0;
+      margin-right: 10px;
+      fill: #F8F8F8;
+      transition: fill .2s ease-in-out;
+      @media (max-width: 600px) {
+        margin-right: 5px;
+      }
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        & .events__link-span {
+          color: #5BB425;
+        }
+
+        & svg {
+          fill: #5BB425;
+        }
+      }
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 14px;
+      line-height: 17px;
+    }
+    @media (max-width: 600px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+
+  &__link-span {
+    color: #ffffff;
+
+    transition: color .2s ease-in-out;
+
+    & span {
+      color: #5BB425;
+    }
+  }
+
+  &__wrapper-bet {}
+
+  &__bet {
+    display: inline-block;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 13px;
+    text-transform: uppercase;
+    padding: 10px;
+    color: #FFFFFF;
+    background-color: #5BB425;
+    border-radius: 5px;
+    transition: background-color .2s ease-in-out;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #ffffff;
+        background-color: rgba(142, 255, 72, 0.29);
+      }
+    }
+    @media (max-width: 1024px) {
+      padding: 11px 14px;
+    }
+    @media (max-width: 600px) {
+      padding: 10px 5px;
+      font-size: 9px;
+      line-height: 11px;
+    }
+  }
+}
+
+.image-tennis {
+  background-image: url(../../img/events/tennis.jpg);
+}
+
+.image-footbal {
+  background-image: url(../../img/events/footbal.jpg);
+}
+
+.image-games {
+  background-image: url(../../img/events/games.jpg);
+}
+
+.events__link-svg {}
+
+.events__link-svg {
+ @media (max-width: 600px) {
+  display: none;
+ }
+}
+
+.events__link-svg_2 {
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+   }
+}

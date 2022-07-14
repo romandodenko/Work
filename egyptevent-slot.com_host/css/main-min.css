@@ -1,0 +1,1431 @@
+/* nrm */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+/* nrm */
+
+/* fnt */
+@font-face {
+  font-family: "Alata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Alata-Regular"), url("../fonts/Alata-Regular.woff2") format("woff2"), url("../fonts/Alata-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("HoltwoodOneSC-Regular"), url("../fonts/HoltwoodOneSC-Regular.woff2") format("woff2"), url("../fonts/HoltwoodOneSC-Regular.woff") format("woff");
+}
+/* fnt */
+
+/* ovrl */
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: "Alata";
+  background-color: #150600;
+}
+
+main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+.page-block {
+  padding: 0 20px;
+  max-width: 1164px;
+  margin: 0 auto;
+  margin-top: -100px;
+}
+@media (max-width: 1024px) {
+  .page-block {
+    padding: 0 15px;
+    margin-top: -80px;
+  }
+}
+@media (max-width: 600px) {
+  .page-block {
+    padding: 0 10px;
+    margin-top: -60px;
+  }
+}
+.page-block_changes {
+  margin-top: 0;
+  padding-top: 150px;
+}
+@media (max-width: 600px) {
+  .page-block_changes {
+    padding-top: 100px;
+  }
+}
+.page-block__body {
+  padding: 60px 0;
+  background-color: #361609;
+  border-radius: 24px 24px 0 0;
+}
+@media (max-width: 600px) {
+  .page-block__body {
+    padding: 40px 0;
+  }
+}
+
+.pop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+}
+.pop__blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+.pop__body {
+  position: relative;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 572px;
+  background: -o-linear-gradient(349.02deg, #683B09 0%, #CB7600 100%);
+  background: linear-gradient(100.98deg, #683B09 0%, #CB7600 100%);
+  border-radius: 10px;
+  padding: 35px 20px;
+}
+@media (max-width: 600px) {
+  .pop__body {
+    max-width: 95%;
+  }
+}
+.pop__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+@media (max-width: 1024px) {
+  .pop__text {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+@media (max-width: 600px) {
+  .pop__text {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+.pop__link {
+  text-align: center;
+}
+.pop__link a {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 22px;
+  color: #FFFFFF;
+  padding: 12px 50px 17px 50px;
+  border: 4px solid #FFFFFF;
+  border-radius: 12px;
+  -webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .pop__link a {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .pop__link a {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+@media (any-hover: hover) {
+  .pop__link a:hover {
+    border-color: #FF9700;
+    color: #FF9700;
+  }
+}
+/* ovrl */
+
+/* hd */
+.hd {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  background-color: transparent;
+}
+.hd__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 88px;
+}
+@media (max-width: 1024px) {
+  .hd__container {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+}
+.hd__logo {
+  max-width: 261px;
+  height: 75px;
+}
+@media (max-width: 600px) {
+  .hd__logo {
+    max-width: 158px;
+    height: 45px;
+  }
+}
+.hd__logo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hd__logo a img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+.hd__menu-logo {
+  display: none;
+  max-width: 261px;
+  height: 75px;
+  margin-bottom: 140px;
+}
+@media (max-width: 1024px) {
+  .hd__menu-logo {
+    display: block;
+  }
+}
+@media (max-width: 600px) {
+  .hd__menu-logo {
+    max-width: 202px;
+    height: 58px;
+    margin-bottom: 160px;
+  }
+}
+.hd__menu-logo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hd__menu-logo a img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+@media (max-width: 1024px) {
+  .hd__menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #150600;
+    z-index: 100;
+    padding: calc(15px + 15 * ((100vw - 320px) / 1600));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: auto;
+    -webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, pointer-events 0.2s ease-in-out;
+    -o-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, pointer-events 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, pointer-events 0.2s ease-in-out;
+  }
+}
+@media (max-width: 600px) {
+  .hd__menu {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+}
+.hd__exit-menu {
+  display: none;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background-color: transparent;
+}
+@media (max-width: 1024px) {
+  .hd__exit-menu {
+    display: block;
+    top: calc(15px + 15 * ((100vw - 320px) / 1600));
+    left: calc(15px + 15 * ((100vw - 320px) / 1600));
+  }
+}
+.hd__exit-menu::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 90%;
+  height: 3px;
+  background-color: #FFFFFF;
+}
+.hd__exit-menu::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-left: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 600px) {
+  .nav {
+    width: 100%;
+  }
+}
+.nav__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 55px;
+}
+@media (max-width: 1024px) {
+  .nav__list {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+@media (max-width: 600px) {
+  .nav__list {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    row-gap: 34px;
+    width: 100%;
+  }
+}
+.nav__link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 32px;
+  color: #FFFFFF;
+  -webkit-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .nav__link {
+    font-size: 25px;
+    line-height: 34px;
+  }
+}
+@media (any-hover: hover) {
+  .nav__link:hover {
+    color: #FF9700;
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: calc(35px + 17 * ((100vw - 320px) / 1600));
+  height: calc(19px + 7 * ((100vw - 320px) / 1600));
+  background-color: transparent;
+}
+@media (max-width: 1024px) {
+  .burger {
+    display: block;
+  }
+}
+.burger__line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF9700;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border-radius: 30px;
+}
+.burger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF9700;
+  border-radius: 30px;
+}
+.burger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FF9700;
+  border-radius: 30px;
+}
+
+.menu-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+/* hd */
+
+/* hr */
+.hr {
+  background-image: url(../img/hr/im.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1024px) {
+  .hr {
+    background-image: url(../img/hr//im_2.jpg);
+  }
+}
+@media (max-width: 600px) {
+  .hr {
+    background-image: url(../img/hr/im_3.jpg);
+  }
+}
+.hr__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 761px;
+}
+@media (max-width: 600px) {
+  .hr__container {
+    padding-top: 200px;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+}
+.hr__body {
+  max-width: 690px;
+}
+@media (max-width: 1024px) {
+  .hr__body {
+    max-width: 480px;
+  }
+}
+.hr__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 37px;
+  line-height: 60px;
+  color: #FF9700;
+}
+@media (max-width: 1024px) {
+  .hr__title {
+    font-size: 31px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .hr__title {
+    font-size: 32px;
+    line-height: 52px;
+  }
+}
+.hr__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 39px;
+  color: #FFFFFF;
+  margin-bottom: 60px;
+}
+@media (max-width: 1024px) {
+  .hr__text {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 90px;
+  }
+}
+@media (max-width: 600px) {
+  .hr__text {
+    font-size: 17px;
+    line-height: 23px;
+    margin-bottom: 30px;
+  }
+}
+.hr__wrapper-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: -o-linear-gradient(355.24deg, #FF9700 0%, #B14000 100%);
+  background: linear-gradient(94.76deg, #FF9700 0%, #B14000 100%);
+  border-radius: 12px;
+  width: 268px;
+  padding: 4px;
+  margin-left: 40px;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .hr__wrapper-link {
+    width: 229px;
+    margin-left: 0;
+  }
+}
+@media (max-width: 600px) {
+  .hr__wrapper-link {
+    width: 166px;
+  }
+}
+@media (any-hover: hover) {
+  .hr__wrapper-link:hover {
+    opacity: 0.5;
+  }
+}
+.hr__link {
+  width: 100%;
+  height: 100%;
+  background-color: #150600;
+  text-align: center;
+  border-radius: 12px;
+}
+.hr__link a {
+  display: inline-block;
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 39px;
+  color: #FFFFFF;
+  padding: 18px 5px;
+}
+@media (max-width: 1024px) {
+  .hr__link a {
+    font-size: 23px;
+    line-height: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .hr__link a {
+    font-size: 18px;
+    line-height: 25px;
+  }
+}
+/* hr */
+
+/* sl */
+.sl {
+  margin-bottom: 60px;
+}
+.sl__container {
+  padding: 0;
+}
+.sl__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 55px;
+  color: #FF9700;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+@media (max-width: 1024px) {
+  .sl__title {
+    font-size: 35px;
+    line-height: 57px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+  }
+}
+@media (max-width: 600px) {
+  .sl__title {
+    font-size: 30px;
+    line-height: 49px;
+    padding: 0 10px;
+  }
+}
+.sl__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 1fr 80px 1fr 80px 1fr;
+  grid-template: auto/repeat(3, 1fr);
+  gap: 80px;
+}
+@media (max-width: 1024px) {
+  .sl__list {
+    gap: 35px 26px;
+  }
+}
+@media (max-width: 600px) {
+  .sl__list {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+.sl__image {
+  position: relative;
+  height: 423px;
+  overflow: hidden;
+  border-radius: 18px;
+  margin-bottom: 10px;
+}
+.sl__image img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+.sl__image a {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sl__image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .sl__image {
+    height: 274px;
+  }
+}
+@media (max-width: 600px) {
+  .sl__image {
+    height: 423px;
+  }
+}
+@media (any-hover: hover) {
+  .sl__image:hover::before {
+    opacity: 1;
+  }
+  .sl__image:hover .sl__treg {
+    opacity: 1;
+  }
+}
+.sl__treg {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 0 !important;
+  height: 0 !important;
+  border-style: solid;
+  border-width: 39px 0 39px 78px;
+  border-color: transparent transparent transparent #E28908;
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+.sl__name {
+  text-align: center;
+}
+.sl__name a {
+  width: 100%;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
+  line-height: 41px;
+  color: #FFFFFF;
+  -webkit-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .sl__name a {
+    font-size: 19px;
+    line-height: 26px;
+  }
+}
+@media (max-width: 600px) {
+  .sl__name a {
+    font-size: 24px;
+    line-height: 33px;
+  }
+}
+@media (any-hover: hover) {
+  .sl__name a:hover {
+    color: #FF9700;
+  }
+}
+
+.sl-pl__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 55px;
+  color: #FF9700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+@media (max-width: 1024px) {
+  .sl-pl__title {
+    font-size: 35px;
+    line-height: 57px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .sl-pl__title {
+    font-size: 30px;
+    line-height: 49px;
+  }
+}
+.sl-pl__play {
+  width: 100%;
+  height: 800px;
+}
+@media (max-width: 768px) {
+  .sl-pl__play {
+    height: 400px;
+  }
+}
+.sl-pl__play iframe {
+  width: 100%;
+  height: 100%;
+}
+/* sl */
+
+/* ab */
+.ab__container {
+  overflow: hidden;
+}
+.ab__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 55px;
+  color: #FF9700;
+  margin-bottom: 20px;
+}
+@media (max-width: 1024px) {
+  .ab__title {
+    font-size: 35px;
+    line-height: 57px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .ab__title {
+    font-size: 30px;
+    line-height: 49px;
+  }
+}
+.ab__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .ab__body {
+    display: block;
+  }
+}
+.ab__descr {
+  width: 60%;
+  background: -o-linear-gradient(329.06deg, #6B3D08 0%, #9C5C02 100%);
+  background: linear-gradient(120.94deg, #6B3D08 0%, #9C5C02 100%);
+  border-radius: 8px;
+  padding: 30px 15px;
+}
+@media (max-width: 1024px) {
+  .ab__descr {
+    width: 100%;
+    margin-bottom: 60px;
+  }
+}
+.ab__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  color: #FFFFFF;
+}
+@media (max-width: 600px) {
+  .ab__text {
+    font-size: 19px;
+    line-height: 26px;
+  }
+}
+.ab__text:not(:last-child) {
+  margin-bottom: 30px;
+}
+@media (max-width: 1024px) {
+  .ab__text:not(:last-child) {
+    margin-bottom: 40px;
+  }
+}
+.ab__image {
+  position: relative;
+  width: 40%;
+  height: 518px;
+  text-align: center;
+}
+.ab__image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: -o-radial-gradient(50% 50%, 50% 50%, #FBC970 0%, rgba(240, 170, 58, 0) 100%);
+  background: radial-gradient(50% 50% at 50% 50%, #FBC970 0%, rgba(240, 170, 58, 0) 100%);
+  z-index: 1;
+}
+@media (max-width: 1024px) {
+  .ab__image::before {
+    width: 420px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+}
+@media (max-width: 600px) {
+  .ab__image::before {
+    width: 320px;
+  }
+}
+.ab__image img {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+@media (max-width: 1024px) {
+  .ab__image {
+    width: 100%;
+    height: 490px;
+  }
+}
+@media (max-width: 600px) {
+  .ab__image {
+    height: 436px;
+  }
+}
+/* ab */
+
+/* bn */
+.bn {
+  margin-bottom: 60px;
+}
+.bn__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 55px;
+  color: #FF9700;
+  margin-bottom: 20px;
+}
+@media (max-width: 1024px) {
+  .bn__title {
+    font-size: 35px;
+    line-height: 57px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .bn__title {
+    font-size: 30px;
+    line-height: 49px;
+  }
+}
+.bn__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 1fr 40px 1fr;
+  grid-template: auto/repeat(2, 1fr);
+  gap: 20px 40px;
+}
+@media (max-width: 1024px) {
+  .bn__list {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+.bn__item {
+  position: relative;
+}
+.bn__body {
+  width: 90%;
+  background: -o-linear-gradient(346.92deg, rgba(145, 89, 9, 0.53) 0%, #AC6600 100%);
+  background: linear-gradient(103.08deg, rgba(145, 89, 9, 0.53) 0%, #AC6600 100%);
+  border-radius: 12px;
+  padding: 30px 15px;
+  height: 100%;
+}
+.bn__descr {
+  position: relative;
+  z-index: 3;
+  max-width: 310px;
+}
+@media (max-width: 600px) {
+  .bn__descr {
+    max-width: 155px;
+  }
+}
+.bn__subtitle {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 36px;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+}
+@media (max-width: 1024px) {
+  .bn__subtitle {
+    font-size: 29px;
+    line-height: 47px;
+  }
+}
+@media (max-width: 600px) {
+  .bn__subtitle {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+.bn__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 26px;
+  color: #FFFFFF;
+}
+@media (max-width: 1024px) {
+  .bn__text {
+    font-size: 21px;
+    line-height: 29px;
+  }
+}
+@media (max-width: 600px) {
+  .bn__text {
+    font-size: 12px;
+    line-height: 17px;
+  }
+}
+.bn__image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 218px;
+  height: 254px;
+  z-index: 2;
+}
+.bn__image img {
+  display: block !important;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+@media (max-width: 1024px) {
+  .bn__image {
+    width: 265px;
+    height: 318px;
+  }
+}
+@media (max-width: 600px) {
+  .bn__image {
+    width: 159px;
+    height: 198px;
+  }
+}
+/* bn */
+
+/* ft */
+.ft__wrapper {
+  max-width: 1164px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+@media (max-width: 1024px) {
+  .ft__wrapper {
+    padding: 0 15px;
+  }
+}
+@media (max-width: 600px) {
+  .ft__wrapper {
+    padding: 0 10px;
+  }
+}
+.ft__body {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #000000;
+}
+@media (max-width: 1024px) {
+  .ft__body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+@media (max-width: 600px) {
+  .ft__body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+.ft__container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
+  grid-template: auto/repeat(12, 1fr);
+  gap: 30px 10px;
+}
+@media (max-width: 900px) {
+  .ft__container {
+    grid-template-areas: "middle middle middle middle middle middle middle middle middle middle middle middle" "left left left left left left right right right right right right";
+  }
+}
+.ft__left {
+  -ms-grid-column-span: 3;
+  grid-column: span 3;
+}
+@media (max-width: 900px) {
+  .ft__left {
+    grid-area: left;
+  }
+}
+.ft__title {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 36px;
+  color: #FF8D00;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .ft__title {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
+.ft__title_right {
+  text-align: right;
+}
+.ft__ul_right {
+  text-align: right;
+}
+.ft__li:not(:last-child) {
+  margin-bottom: 30px;
+}
+.ft__link {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  color: #FFFFFF;
+  -webkit-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+@media (max-width: 600px) {
+  .ft__link {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+@media (any-hover: hover) {
+  .ft__link:hover {
+    color: #FF8D00;
+  }
+}
+.ft__middle {
+  -ms-grid-column-span: 6;
+  grid-column: span 6;
+}
+@media (max-width: 900px) {
+  .ft__middle {
+    grid-area: middle;
+  }
+}
+.ft__logo {
+  max-width: 447px;
+  height: 134px;
+  margin: 0 auto;
+  margin-bottom: 35px;
+}
+@media (max-width: 1024px) {
+  .ft__logo {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .ft__logo {
+    height: 96px;
+  }
+}
+.ft__logo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ft__logo a img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+.ft__warning {
+  max-width: 90%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .ft__warning {
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+.ft__right {
+  -ms-grid-column-span: 3;
+  grid-column: span 3;
+}
+@media (max-width: 900px) {
+  .ft__right {
+    grid-area: right;
+  }
+}
+@media (max-width: 900px) {
+  .ft__left {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 6;
+  }
+  .ft__middle {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 12;
+  }
+  .ft__right {
+    -ms-grid-row: 2;
+    -ms-grid-column: 7;
+    -ms-grid-column-span: 6;
+  }
+}
+/* ft */
+
+/* tr */
+.tr h1 {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 54px;
+  text-align: center;
+  color: #FFB800;
+  margin-bottom: 30px;
+}
+@media (max-width: 1024px) {
+  .tr h1 {
+    font-size: 26px;
+    line-height: 42px;
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .tr h1 {
+    font-size: 21px;
+    line-height: 35px;
+    margin-bottom: 20px;
+  }
+}
+.tr h2 {
+  font-family: "HoltwoodOneSC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 54px;
+  text-align: center;
+  color: #FFB800;
+  margin-bottom: 30px;
+}
+@media (max-width: 1024px) {
+  .tr h2 {
+    font-size: 26px;
+    line-height: 42px;
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .tr h2 {
+    font-size: 21px;
+    line-height: 35px;
+    margin-bottom: 20px;
+  }
+}
+.tr p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 29px;
+  text-align: center;
+  color: #FFFFFF;
+}
+@media (max-width: 1024px) {
+  .tr p {
+    font-size: 18px;
+    line-height: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .tr p {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+.tr p:not(:last-child) {
+  margin-bottom: 25px;
+}
+@media (max-width: 600px) {
+  .tr p:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+.tr ul:not(:last-child) {
+  margin-bottom: 25px;
+}
+@media (max-width: 600px) {
+  .tr ul:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+.tr li {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 26px;
+  text-align: center;
+  color: #FFFFFF;
+}
+@media (max-width: 1024px) {
+  .tr li {
+    font-size: 16px;
+    line-height: 23px;
+  }
+}
+@media (max-width: 600px) {
+  .tr li {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+.tr li:not(:last-child) {
+  margin-bottom: 25px;
+}
+@media (max-width: 600px) {
+  .tr li:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+/* tr */

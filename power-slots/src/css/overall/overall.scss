@@ -1,0 +1,224 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1360;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #7B68EE;
+  --active: #4169E1;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato';
+  background-color: #0F3E67;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+.first-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(15px);
+
+  & img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+  }
+}
+
+.first {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #5A91C9;
+    border-radius: 26px;
+    max-width: 687px;
+    z-index: 2;
+    padding: 25px;
+    @media (max-width: 1024px) {
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      max-width: 95%;
+    }
+    @media (max-width: 600px) {
+      padding: 15px;
+    }
+  }
+
+  &__text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    @media (max-width: 1024px) {
+      font-size: 23px;
+      line-height: 28px;
+    }
+    @media (max-width: 600px) {
+      font-size: 20px;
+      line-height: 25px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__wrapper-accept {
+    margin-bottom: 20px;
+    @media (max-width: 600px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__accept {
+    display: inline-block;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    color: #FFFFFF;
+    background-color: #2A174E;
+    border-radius: 6px;
+    padding: 17px 10px;
+    transition: background-color .2s ease-in-out;
+    @media (max-width: 1024px) {
+      font-size: 23px;
+      line-height: 28px;
+      padding: 15px 10px;
+    }
+    @media (max-width: 600px) {
+      font-size: 20px;
+      line-height: 25px;
+      padding: 10px 10px;
+    }
+    @media (any-hover: hover) {
+    &:hover {
+      background-color: #FB834F;
+    }
+    }
+  }
+
+  &__not {
+    display: inline-block;
+    position: relative;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    color: #2A174E;
+    transition: color .2s ease-in-out;
+    @media (max-width: 1024px) {
+      font-size: 23px;
+      line-height: 28px;
+    }
+    @media (max-width: 600px) {
+      font-size: 16px;
+      line-height: 21px;
+    }
+    @media (any-hover: hover) {
+    &:hover {
+      color: #FB834F;
+      &::after {
+        background-color: #FB834F;
+      }
+    }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #2A174E;
+      transition: background-color .2s ease-in-out;
+    }
+  }
+}

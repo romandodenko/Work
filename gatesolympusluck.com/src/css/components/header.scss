@@ -1,0 +1,307 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.header {
+  width: 453px;
+  flex-shrink: 0;
+  padding: 35px 0 35px 20px;
+
+  @media (max-width: 1400px) {
+    width: 353px;
+    padding: 15px 0 15px 20px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #84B5FF;
+  }
+
+  &__container {
+    padding: 0;
+
+    @media (max-width: 1024px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0 10px;
+    }
+  }
+
+  &__strong {
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 38px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 25px 0 15px 0;
+    margin-bottom: 25px;
+
+    @media (max-width: 1024px) {
+      background-color: #84B5FF;
+      padding: 33.5px 15px;
+      margin-bottom: 98px;
+    }
+
+    @media (max-width: 600px) {
+      text-align: right;
+    }
+  }
+
+  &__wrapper-logo {
+    background-color: #84B5FF;
+    border-radius: 14px 14px 0 0;
+
+    @media (max-width: 1024px) {
+      border-radius: 0;
+      background-color: transparent;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 198px;
+    height: 117px;
+    margin: 0 auto;
+
+    @media (max-width: 1024px) {
+      width: 146px;
+      height: 86px;
+    }
+
+    & img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+
+  &__menu {
+    background-color: #3C72C3;
+    padding-bottom: 100px;
+    border-radius: 0 0 14px 14px;
+
+    @media (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 100;
+      padding: 0 0 60px 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: auto;
+      border-radius: 0;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+    }
+  }
+
+  &__exit-menu {
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+
+    @media (max-width: 1024px) {
+      display: block;
+      top: 41px;
+      left: 15px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.nav {
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 35px;
+
+      @media (max-width: 1024px) {
+        margin-bottom: 44px;
+      }
+
+      @media (max-width: 600px) {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    transition: border-color .2s ease-in-out;
+    padding: 5px 25px;
+    background-color: #354E74;
+    box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+
+    @media (any-hover: hover) {
+      &:hover {
+        border-color: #ffffff;
+      }
+    }
+
+    @media (max-width: 600px) {
+      padding: 5px 15px;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 50px;
+    margin-right: 40px;
+
+    @media (max-width: 1024px) {
+      width: 59px;
+      height: 61px;
+    }
+
+    @media (max-width: 600px) {
+      width: 40px;
+      height: 50px;
+    }
+
+    & img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  @include adaptive ("width", 53, 42, 0);
+  @include adaptive ("height", 34, 28, 0);
+  background-color: transparent;
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 60%;
+    height: 6px;
+    background-color: #1A488D;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: #1A488D;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: #1A488D;
+  }
+}
+
+.menu-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

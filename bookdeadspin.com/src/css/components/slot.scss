@@ -1,0 +1,261 @@
+.slot {
+  margin-bottom: 82px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 41px;
+  }
+
+  &__title {
+    width: max-content;
+    position: relative;
+    padding-right: 50px;
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 117.5%;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: #343434;
+    margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      font-size: 22px;
+      padding-right: 40px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 36px;
+      height: 2px;
+      background-color: #094081;
+      transform: translateY(-50%);
+
+      @media (max-width: 1024px) {
+        width: 30px;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 14px;
+      height: 14px;
+      transform: translate(0, -50%) rotate(-45deg);
+      border-right: 2px solid #094081;
+      border-bottom: 2px solid #094081;
+
+      @media (max-width: 1024px) {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-auto-rows: auto;
+    gap: 20px;
+
+    @media (max-width: 650px) {
+      display: block;
+    }
+  }
+
+  &__item {
+    @media (max-width: 650px) {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    height: 290px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    @media (max-width: 1024px) {
+      height: 174px;
+    }
+
+    @media (max-width: 650px) {
+      height: 248px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+
+        &::before {
+          opacity: 1;
+        }
+
+        & .slot__icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .4);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+    }
+
+    & a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 76px;
+    height: 55px;
+    background-color: #34DAF4;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 56%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 15.5px 0 15.5px 26px;
+      border-color: transparent transparent transparent #ffffff;
+    }
+  }
+
+  &__name {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 104%;
+    letter-spacing: -0.025em;
+    color: #000000;
+    transition: color .2s ease-in-out;
+
+    @media (max-width: 1024px) {
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 21px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #34DAF4;
+      }
+    }
+  }
+}
+
+.slot-item-1 {
+  grid-column: span 5;
+}
+
+.slot-item-2 {
+  grid-column: span 3;
+}
+
+.slot-item-3 {
+  grid-column: span 3;
+}
+
+.book-of-darkness {
+  background-image: url(../../img/slot/book-of-darkness.jpg);
+}
+
+.book-of-kingdom {
+  background-image: url(../../img/slot/book-of-kingdom.jpg);
+}
+
+.book-lock-of-spin {
+  background-image: url(../../img/slot/book-lock-of-spin.jpg);
+}
+
+.slot-play {
+  padding-bottom: 50px;
+
+  &__container {}
+
+  &__title {
+    font-family: 'K2D';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 117.5%;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #343434;
+    margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      font-size: 22px;
+      padding-right: 40px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+  }
+
+  &__iframe {
+    height: 650px;
+
+    @media (max-width: 768px) {
+      height: 325px;
+    }
+
+    & iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

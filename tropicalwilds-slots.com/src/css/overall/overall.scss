@@ -1,0 +1,142 @@
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inder';
+  background-color: #008047;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+.popup {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  &__blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+  }
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    max-width: 437px;
+    background-color: #E59F00;
+    border-radius: 10px;
+    padding: 20px;
+    @media (max-width: 600px) {
+      max-width: 95%;
+    }
+  }
+
+  &__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 26px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+
+    @media (max-width: 1024px) {
+      font-size: 19px;
+      line-height: 24px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  &__link {
+    text-align: center;
+    & a {
+      display: inline-block;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 26px;
+      color: #FFFFFF;
+      padding: 13.5px 10px;
+      background-color: #5C8F0B;
+      border-radius: 6px;
+      transition: background-color .2s ease-in-out;
+      @media (max-width: 1024px) {
+        font-size: 19px;
+        line-height: 24px;
+      }
+  
+      @media (max-width: 600px) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          background-color: #008047;
+        }
+      }
+    }
+  }
+}
+
+.site-block {
+  margin-top: -50px;
+  padding: 0 20px;
+
+  @media (max-width: 1024px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+    margin-top: -100px;
+  }
+
+  &_terms {
+    margin-top: 120px;
+
+    @media (max-width: 600px) {
+      margin-top: 85px;
+    }
+  }
+
+  &__items {
+    max-width: 1205px;
+    margin: 0 auto;
+    background-color: #E6D167;
+    border-radius: 26px 26px 0 0;
+    padding: 70px 0;
+  }
+}

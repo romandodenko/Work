@@ -1,0 +1,865 @@
+@font-face {
+    font-family: 'Kodchasan';
+    src:
+         url('../fonts/Kaushanscript.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/JosefinSans.woff2) format('woff2');
+
+  }
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+}
+
+h2 {
+    font-family: 'Kodchasan';
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 57px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 37px;
+    line-height: 37px;
+
+    color: #ffffff;
+}
+.body-block {
+    padding: 10px;
+    background-color: rgba(87, 85, 85, 0.493);
+}
+h1 {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 51px;
+    line-height: 66px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+p {
+    font-family: Josefin Sans;
+    font-size: 27px;
+    line-height: 27px;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-style: normal;
+}
+
+.modalMiddle {
+    height: 100vh;
+    background-image: url(../img/bg1modal.png);
+    background-size: cover;
+    display: flex;
+}
+
+
+.modal {
+    display: flex;
+    margin: auto;
+    background: #653616;
+    border-radius: 15px;
+}
+
+.modal-disable {
+    display: none;
+}
+
+.modal__item-btns a:hover {
+    cursor: pointer;
+}
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.close:hover {
+    transition: .3s;
+    color: #C97134;
+}
+
+.close:before,
+.close:after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 4px;
+    background: #FFFFFF;
+    font-weight: 500;
+}
+
+.close:hover:before,
+.close:hover:after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 4px;
+    background: #C97134;
+    font-weight: 500;
+}
+
+.close:before {
+    transform: rotate(45deg);
+}
+
+.close:after {
+    transform: rotate(-45deg);
+}
+
+.close.closeMob {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.modalBtn {
+    padding: 20px;
+    color: #FFFFFF;
+    background: transparent;
+    border: 2px solid #C97134;
+    border-radius: 7px;
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 27px;
+}
+
+.modalBtn:hover {
+    background: #C97134;
+    transition: .3s;
+
+}
+
+.cookieBlock {
+  
+    display: none;
+
+}
+.cookieBlock-active {
+    padding: 20px;
+    overflow: auto;
+    /* width: auto; */
+    height: 400px;
+    display: flex;
+
+}
+
+
+
+
+header {
+    background: #575555;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
+
+.menu {
+    height: 100%;
+    align-items: center;
+}
+
+.menu .item {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF; 
+}
+.logo {
+    text-align: center;
+}
+.social {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+}
+.menu .item:hover {
+    color: #C97134;
+    transition: .3s;
+}
+
+
+/* скрываем чекбокс */
+#menu__toggle {
+    opacity: 0;
+}
+
+/* стилизуем кнопку */
+.menu__btn {
+    display: flex;
+    /* используем flex для центрирования содержимого */
+    align-items: center;
+    /* центрируем содержимое кнопки */
+    position: relative;
+
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* добавляем "гамбургер" */
+.menu__btn>span,
+.menu__btn>span::before,
+.menu__btn>span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #C97134;
+}
+
+.menu__btn>span::before {
+    content: '';
+    top: -8px;
+    background-color: #C97134;
+}
+
+.menu__btn>span::after {
+    content: '';
+    top: 8px;
+    background-color: #C97134;
+
+}
+
+.menu__box {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    text-align: center;
+    background-color: #783f17;
+    box-shadow: 1px 0px 6px rgb(0 0 0 / 20%);
+    transition: .5s;
+    z-index: 10000;
+}
+
+.menu__box-active {
+    display: block;
+
+}
+
+.logoMob {
+    position: absolute;
+    bottom: 70px;
+    left: 95px;
+}
+
+.withCooki {
+    display: none;
+}
+
+.withCooki.withCooki-active {
+    display: flex;
+    position: absolute;
+}
+
+.modalMiddle__disable {
+    display: none;
+}
+
+
+/* элементы меню */
+.menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: #ffffff;
+
+
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+}
+
+.menu__item:hover {
+    background-color: #CFD8DC;
+}
+
+
+
+.banner {
+    background-image: url(../img/bg1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-position: center;
+}
+
+.toGames {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 43px;
+    line-height: 43px;
+    padding: 20px 40px;
+    color: #FFFFFF;
+    background: rgba(122, 28, 43, 0.36);
+    border: 5px solid #3475c9;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.toGames:hover {
+    background-color: #3475c9;
+    transition: .3s;
+
+}
+
+
+
+.boxes {
+    background: rgba(122, 28, 43, 0.36);
+    border: 6px solid #3475c9;
+    border-radius: 9px;
+    padding: 10px;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.boxes h2 {
+    text-align: center;
+}
+
+.borderBoxPrivacy {
+    background: rgba(122, 28, 43, 0.36);
+    border: 6px solid #3475c9;
+    border-radius: 9px;
+    padding: 10px;
+
+}
+
+.borderBoxPrivacy h1 {
+
+    font-size: 40px;
+    color: #ffffff;
+
+}
+
+.borderBoxPrivacy h2 {
+
+    font-size: 30px;
+    color: #472012;
+    font-weight: bold;
+
+}
+
+.borderBoxPrivacy ul {
+
+    /* font-size: 30px; */
+    color: #ffffff;
+
+}
+
+
+
+.title {
+    display: flex;
+}
+
+.title img {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+
+.title h2 {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 49px;
+    text-transform: uppercase;
+    margin: auto;
+}
+
+.descr {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 33px;
+    text-align: center;
+}
+
+.aboutBg {
+    position: relative;
+    background-image: url(../img/aboutBg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #271410;
+    background-position: center;
+}
+.aboutBg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    z-index: 1;
+}
+.aboutBg .row {
+    position: relative;
+    z-index: 2;
+}
+.aboutBg h2 {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 65px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.games {
+    background: #575555;
+}
+
+.games h2 {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 65px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.aboutBg p {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 36px;
+    text-align: center;
+    margin: 20px;
+}
+
+.gameMain h3 {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 46px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    bottom: 20px;
+    left: 10px;
+
+
+}
+
+.gameBtn a {
+    font-family: 'Kodchasan';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(122, 28, 43, 0.36);
+border: 2px solid #3475c9;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.gameBtn a:hover {
+    background-color: #C97134;
+    transition: .3s;
+
+}
+
+.arrow-3 {
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    height: 25px;
+    line-height: 18px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.arrow-3 .arrow-3-icon {
+    position: relative;
+    top: -1px;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.gameMain {
+    display: block;
+    min-width: 250px;
+    min-height: 400px;
+    background-image: linear-gradient(to top, black 0%, transparent 100%), url(../img/g1.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.gameMain-1 {
+
+    background-image: linear-gradient(to top, black 0%, transparent 100%), url(../img/g2.png);
+
+}
+
+.gameMain-2 {
+
+    background-image: linear-gradient(to top, black 0%, transparent 100%), url(../img/g3.png);
+
+}
+
+
+footer {
+    background: #575555;
+    color: #ffffff;
+}
+
+footer p {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.terms {
+    padding: 0 !important;
+}
+
+footer .terms li,
+footer .menu li {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    padding: 10px 0;
+}
+
+footer .terms li a,
+footer .menu li a {
+
+
+    color: #FFFFFF;
+}
+
+footer .terms li a:hover,
+footer .menu li a:hover {
+
+
+    color: #C97134;
+    transition: .3s;
+}
+
+iframe {
+    width: 100%;
+    height: 100vh;
+}
+
+.gameBg {
+    background-image: url(../img/bg1.png);
+    background-size: cover;
+
+}
+
+@media all and (max-width: 1300px) {
+    .title h2 {
+        font-size: 25px;
+    }
+
+    .title img {
+        height: 150px;
+        width: 150px;
+    }
+
+    .modalBtn {
+
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    .modal__item p {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .modal__item h2 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+}
+
+@media all and (max-width: 992px) {
+    .title h2 {
+        font-size: 25px;
+    }
+
+    .gameMain {
+        min-width: 200px;
+        min-height: 250px;
+    }
+
+    .gameMain h3 {
+        font-size: 25px;
+    }
+
+    .gameBtn a {
+
+        font-size: 15px;
+        line-height: 30px;
+
+    }
+
+    .modalBtn {
+        width: 48%;
+        margin: auto;
+        text-align: center;
+        padding: 10px;
+        padding: 10px;
+    }
+
+    .modalBtn {
+        font-size: 16px;
+    }
+    h1 {
+   
+        font-size: 41px;
+        line-height: 40px;
+
+    }
+
+    .toGames {
+
+        font-size: 43px;
+        line-height: 43px;
+        padding: 10px 20px;
+
+    }
+}
+
+@media all and (max-width: 768px) {
+
+    .gameMain {
+        min-width: 100%;
+        min-height: 400px;
+    }
+
+    .banner h1 {
+        font-size: 41px;
+
+    }
+
+    .toGames {
+
+        font-size: 34px;
+    }
+
+    footer p {
+        font-size: 29px;
+    }
+
+    .borderBoxPrivacy h1 {
+
+        font-size: 20px;
+        line-height: 40px;
+
+    }
+
+    .borderBoxPrivacy p {
+
+        font-size: 20px;
+        line-height: 20px;
+
+    }
+
+    .close {
+
+        top: 10px;
+    }
+
+    .modalBtn {
+        margin: 10px auto;
+        width: 60%;
+
+    }
+    
+
+}
+
+@media all and (max-width: 576px) {
+
+
+    .aboutBg p {
+
+        font-size: 20px;
+        line-height: 20px;
+
+    }
+
+    .title h2 {
+        font-size: 20px;
+    }
+
+    .title p {
+        font-size: 17px;
+    }
+
+    .menu__btn {
+        top: -10px;
+    }
+
+    .menu__box {
+        width: 100%;
+    }
+
+    .logoMob {
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    footer p {
+        font-size: 24px;
+    }
+
+    .title h2 {
+        line-height: 26px;
+    }
+
+    .descr {
+        font-size: 17px;
+        line-height: 17px;
+    }
+
+    .title img {
+        max-height: 100px;
+        max-width: 100px;
+        margin: 0;
+    }
+
+    .boxes {
+        height: 250px;
+    }
+
+    .aboutBg h2 {
+
+        font-size: 37px;
+        line-height: 37px;
+
+    }
+
+    .games h2 {
+
+        font-size: 37px;
+        line-height: 37px;
+
+    }
+
+    .banner h1 {
+        font-size: 27px;
+        line-height: 35px;
+    }
+
+    .toGames {
+        font-size: 28px;
+        line-height: 28px;
+        padding: 10px 20px;
+    }
+
+    h3 {
+        font-size: 21px;
+        line-height: 21px;
+    }
+
+    .modalBtn {
+        width: 90%;
+
+    }
+
+    .modal__item h2 {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .modal__item p {
+        font-size: 16px;
+        line-height: 25px;
+    }
+    .close {
+        right: 25px;
+    }
+    .banner {
+        height: 80vh;
+    }
+}

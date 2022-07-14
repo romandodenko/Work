@@ -1,0 +1,305 @@
+.game {
+  margin-bottom: 72px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 65px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 45px;
+  }
+
+  &__title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 41px;
+    line-height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FF6737;
+    margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      font-size: 40px;
+      line-height: 49px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 29px;
+      line-height: 35px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__body {
+    margin: 170px 0;
+    @media (max-width: 1024px) {
+      margin: 140px 0 100px 0;
+    }
+    @media (max-width: 600px) {
+      margin: 100px 0 60px 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 18px;
+    margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__item {
+    width: 454px;
+    transition: transform .2s ease-in-out;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: scaleY(1.1);
+
+        & .game__image {
+          &::before {
+            opacity: 1;
+          }
+        }
+
+        & .game__play {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__wrapper-name {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    display: inline-block;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 38px;
+    color: #FFFFFF;
+    transition: color .2s ease-in-out;
+
+    @media (max-width: 1024px) {
+      font-size: 30px;
+      line-height: 36px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 19px;
+      line-height: 23px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #FF6737;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    height: 424px;
+
+    @media (max-width: 1024px) {
+      height: 418px;
+    }
+
+    @media (max-width: 600px) {
+      height: 347px;
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(62, 61, 61, 0.43);
+      z-index: 1;
+      transition: opacity .2s ease-in-out;
+      opacity: 0;
+    }
+  }
+
+  &__play {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 13.5px 36px;
+    color: #E6E6E6;
+    background-color: #FF6737;
+    border-radius: 14px;
+    transition: background-color .2s ease-in-out, opacity .2s ease-in-out;
+    opacity: 0;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      color: transparent;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: #d4532c;
+
+        @media (max-width: 1024px) {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  &__wrapper-all {
+    text-align: center;
+  }
+
+  &__all {
+    display: inline-block;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 13.5px 36px;
+    color: #ffffff;
+    background-color: #FF6737;
+    border-radius: 14px;
+    transition: background-color .2s ease-in-out;
+
+    @media (max-width: 1024px) {
+      font-size: 21px;
+      line-height: 31px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: #d4532c;
+      }
+    }
+  }
+}
+
+.all-games {
+  background-color: #103555;
+}
+
+.all-games .game {
+  margin: 0;
+}
+
+.all-games .game__title {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 58px;
+  line-height: 71px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FF6737;
+  margin-bottom: 60px;
+
+  @media (max-width: 1024px) {
+    font-size: 40px;
+    line-height: 49px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 29px;
+    line-height: 35px;
+    margin-bottom: 20px;
+  }
+}
+
+.play {
+  margin: 170px 0 100px 0;
+  @media (max-width: 1024px) {
+    margin: 140px 0 75px 0;
+  }
+  @media (max-width: 600px) {
+    margin: 100px 0 60px 0;
+  }
+
+  &__title {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 41px;
+    line-height: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FF6737;
+    margin-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      font-size: 40px;
+      line-height: 49px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 29px;
+      line-height: 35px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__iframe {
+    width: 100%;
+    height: 600px;
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+    & iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

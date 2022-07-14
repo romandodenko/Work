@@ -1,0 +1,101 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  padding-top: 100px;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.4);
+      z-index: 1;
+    }
+    & img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      animation-name: img-anim;
+      animation-timing-function: ease-in-out;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  &__container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__body {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 52px;
+    line-height: 62px;
+    margin-bottom: 50px;
+    text-align: center;
+    & span {
+      text-transform: uppercase;
+    }
+    @media (max-width: 1024px) {
+      font-size: 42px;
+      line-height: 52px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 600px) {
+      font-size: 32px;
+      line-height: 42px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__text {
+    font-style: normal;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: center;
+    @media (max-width: 1024px) {
+      font-size: 26px;
+      line-height: 36px;
+    }
+    @media (max-width: 600px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+}
+
+@keyframes img-anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

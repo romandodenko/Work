@@ -1,0 +1,2 @@
+var script=document.createElement('script');script.async=true;script.type='text/javascript';var target='https://www.googletagmanager.com/gtag/js?id=AW-654981000';script.src=target;var elem=document.head;elem.appendChild(script);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','AW-654981000');function gtag_report_conversion(){gtag('event','conversion',{'send_to':'AW-654981000/d3XfCJbQl9kBEIjvqLgC'});return false;}

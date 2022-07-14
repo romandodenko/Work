@@ -1,0 +1,164 @@
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'ZenKakuGothicNew';
+  background-color: #303b41;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.body-block {
+  overflow: hidden;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1;
+  }
+
+  &__body {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    background-color: #303b41;
+    max-width: 600px;
+    border-radius: 15px;
+    padding: 50px 30px 30px 30px;
+    transform: translate(-50%, -50%);
+
+    @media (max-width: 635px) {
+      max-width: none;
+      width: 95%;
+      padding: 50px 20px 20px 20px;
+    }
+  }
+
+  &__text {
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 30px;
+    @media (max-width: 600px) {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  &__wrapper-btn {
+    text-align: center;
+  }
+
+  &__btn {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 20px;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    padding: 15px 40px;
+    background-color: rgb(52, 168, 52);
+    border-radius: 10px;
+    transition: background-color .2s ease-in-out;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: rgb(35, 100, 35);
+      }
+    }
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+      line-height: 18px;
+      padding: 13px 38px;
+    }
+  }
+
+  &__exit {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    width: 28px;
+    height: 20px;
+    background-color: transparent;
+    @media (any-hover: hover) {
+    &:hover {
+      &::before {
+        background-color: rgb(35, 100, 35);
+      }
+      &::after {
+        background-color: rgb(35, 100, 35);
+      }
+    }
+    }
+    &:active {
+    
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 25px;
+      transition: background-color .2s ease-in-out;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.popup-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
