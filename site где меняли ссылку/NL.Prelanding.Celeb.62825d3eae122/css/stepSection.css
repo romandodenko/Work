@@ -1,0 +1,321 @@
+.stepSection {
+  margin-top: 35px;
+}
+.stepSection-title {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 43px;
+  line-height: 115%;
+  text-align: center;
+  color: #ec2613;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.stepWrp {
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  border-radius: 10px;
+}
+.stepWrp:not(:last-of-type) {
+  margin-bottom: 50px;
+}
+.stepWrp:not(:first-of-type) {
+  margin-top: 50px;
+}
+.stepWrp.step2 {
+  flex-direction: row-reverse;
+}
+.step-part1 {
+  max-width: 235px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.step2 .step-part1 {
+  margin-left: 10px;
+  margin-right: 0;
+}
+.step-part1.step3 {
+  max-width: 340px;
+  margin-right: 0;
+}
+.step-subtitle {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  opacity: 0.5;
+  margin-bottom: 5px;
+}
+.step-title {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.step-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+  color: #323232;
+}
+.step-part2 {
+  display: flex;
+  justify-content: center;
+}
+.step-cardWrp {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.step-card {
+  background: rgba(56, 255, 24, 0.02);
+  border: 2px solid #01c65a;
+  border-radius: 5px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  width: 190px;
+  margin-right: 5px;
+}
+.step-card.top {
+  height: 55%;
+}
+.step-card.bottom {
+  height: 40%;
+}
+.step-card.secondStep {
+  height: 100%;
+  max-width: 180px;
+  max-height: 226px;
+  margin-right: 5px;
+  padding: 0 10px;
+}
+.card-text {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  color: #323232;
+}
+.regStep .step-img {
+  max-width: 190px;
+}
+.step-img {
+  height: 100%;
+}
+.stepSection_formContainerImg {
+  width: 190px;
+}
+.regStep,
+.depStep {
+  position: relative;
+}
+.regStep::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 29px;
+  background: center url(../images/formVector.png) no-repeat;
+  background-size: cover;
+  top: 38%;
+  left: -25px;
+  animation: bounce 1600ms infinite;
+}
+.regStep::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 29px;
+  background: center url(../images/formVector.png) no-repeat;
+  background-size: cover;
+  top: 61%;
+  left: -25px;
+  animation: bounce 1600ms infinite;
+}
+.depStep::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 29px;
+  background: center url(../images/formVector.png) no-repeat;
+  background-size: cover;
+  top: 66%;
+  left: -30px;
+  z-index: 2;
+  animation: bounceDep 1600ms infinite;
+}
+@keyframes bounce {
+  50% {
+    left: -35px;
+  }
+}
+@keyframes bounceDep {
+  50% {
+    left: -40px;
+  }
+}
+.arrowDown {
+  text-align: center;
+  transform: translateY(-25px);
+  animation: arrows 1.5s infinite;
+}
+@keyframes arrows {
+  to {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+}
+.manager-img {
+  margin-left: 30px;
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1);
+}
+
+/*response*/
+@media screen and (max-width: 1600px) {
+  .stepSection {
+    background-size: contain;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .stepWrp {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .card-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .dep-img {
+    width: 166px;
+    height: 170px;
+  }
+  .part2-img.step3 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .regStep::before {
+    width: 40px;
+    height: 29px;
+    left: -20px;
+    top: 38%;
+  }
+  .regStep::after {
+    width: 40px;
+    height: 29px;
+    left: -20px;
+    top: 61%;
+  }
+  .depStep::before {
+    width: 40px;
+    height: 29px;
+    left: -25px;
+    top: 66%;
+    z-index: 2;
+  }
+  @keyframes bounce {
+    50% {
+      left: -30px;
+    }
+  }
+  @keyframes bounceDep {
+    50% {
+      left: -30px;
+    }
+  }
+  .manager-img {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .stepSection {
+    margin-top: 45px;
+  }
+  .stepWrp {
+    flex-direction: column;
+  }
+  .stepWrp.step3{
+    flex-direction: column-reverse;
+  }
+  .step-part1 {
+    max-width: unset;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .step-part1.step3{
+    max-width: unset;
+  }
+  .stepWrp.step2 {
+    flex-direction: column;
+  }
+  .step2 .step-part1 {
+    margin-left: 0;
+  }
+  .step-subtitle {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .step-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .step-text {
+    font-size: 17px;
+    line-height: 23px;
+  }
+  .step-card {
+    width: unset;
+  }
+  .regStep {
+    height: 270px;
+  }
+
+  .stepWrp:not(:first-of-type) {
+    margin-top: 40px;
+  }
+  .step-card.secondStep {
+    max-width: unset;
+  }
+  .stepSection-title {
+    font-size: 43px;
+    line-height: 115%;
+    margin: 0 auto 30px;
+  }
+  .manager-img {
+    margin: 0 0 30px;
+  }
+  .depStep::before {
+    top: 66%;
+  }
+  @keyframes bounce {
+    50% {
+      left: -25px;
+    }
+  }
+  .arrowDown img {
+    width: 100%;
+    max-width: 200px;
+  }
+}

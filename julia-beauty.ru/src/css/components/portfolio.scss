@@ -1,0 +1,224 @@
+.portfolio {
+  margin-bottom: 100px;
+
+  @media (max-width: 991px) {
+    margin-bottom: 60px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    line-height: 46px;
+    color: #000000;
+    font-style: normal;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 60px;
+
+    @media (max-width: 991px) {
+      font-size: 32px;
+      line-height: 42px;
+      margin-bottom: 45px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 27px;
+      line-height: 37px;
+      margin-bottom: 30px;
+    }
+
+    & span {
+      display: inline-block;
+      width: 100px;
+      height: 2px;
+      background-color: #000000;
+      margin-top: 15px;
+
+      @media (max-width: 991px) {
+        margin-top: 10px;
+      }
+
+      @media (max-width: 600px) {
+        width: 80px;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  &__tabs {
+    border: 0;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    margin-bottom: 30px;
+  }
+
+  &__content-tab {
+    display: none;
+    grid-template: auto / repeat(4, 1fr);
+    gap: 20px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 450px) {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    &.active {
+      display: grid;
+    }
+  }
+
+  &__link {
+    display: block;
+    height: 300px;
+    overflow: hidden;
+
+    @media (any-hover: hover) {
+      &:hover {
+        & img {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .4s ease-in-out;
+    }
+  }
+
+  &__tabs-link {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1;
+    color: #000000;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px 30px;
+
+    @media (max-width: 600px) {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #000000;
+      }
+    }
+  }
+
+  &__link-inst {
+    text-align: center;
+
+    & a {
+      display: inline-flex;
+      align-items: center;
+      padding: 15px 60px;
+      font-size: 16px;
+      line-height: 1;
+      color: #000000;
+      font-weight: 400;
+      font-style: normal;
+      border: 1px solid #000000;
+      border-radius: 25px;
+
+      @media (max-width: 991px) {
+        padding: 10px 40px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 12px;
+        padding: 10px 30px;
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          & span {
+            transform: rotate(95deg);
+          }
+        }
+      }
+
+      &:active {
+        & span {
+          transform: rotate(95deg);
+        }
+      }
+
+      & span {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        transition: transform .4s ease-in-out;
+        margin-left: 15px;
+
+        @media (max-width: 600px) {
+          width: 24px;
+          height: 24px;
+          margin-left: 10px;
+        }
+
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs .nav-link {
+  border: 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease-in-out, color .2s ease-in-out;
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: #ffa500;
+    }
+  }
+
+  &:active {
+    color: #ffa500;
+  }
+
+  &.active {
+    border-color: #000000;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: #ffa500;
+        border-color: #ffa500;
+      }
+    }
+
+    &:active {
+      color: #ffa500;
+      border-color: #ffa500;
+    }
+  }
+}
