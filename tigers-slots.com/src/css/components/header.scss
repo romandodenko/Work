@@ -1,0 +1,213 @@
+$maxWidth: 1920;
+$maxWidthContainer: 1440;
+
+@mixin adaptive ($property, $startSize, $minSize, $type) {
+  $addSize: $startSize - $minSize;
+
+  @if $type==1 {
+    // Только если меньше контейнера
+    #{$property}: $startSize + px;
+
+    @media (max-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+    }
+  }
+
+  @else if $type==2 {
+    // Только если больше контейнера 
+    #{$property}: $startSize + px;
+
+    @media (min-width: #{$maxWidthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  @else {
+    // Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+  }
+}
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+
+  @media (max-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+  }
+
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+.header {
+  padding: 15px 0;
+  background-color: rgb(139, 38, 38);
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  &__menu {
+    @media (max-width: 991px) {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #222020;
+      z-index: 100;
+      @include adaptive ("padding", 30, 15, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: auto;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+    }
+  }
+
+  &__exit-menu {
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    @media (max-width: 991px) {
+      display: block;
+      @include adaptive ("top", 30, 15, 0);
+      @include adaptive ("left", 30, 15, 0);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(-45deg);
+    }
+  }
+
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    & img {
+      display: block;
+      width: 60px;
+      height: 70px;
+      object-fit: contain;
+      object-position: center;
+    }
+    & span {
+      display: block;
+      font-size: 22px;
+      line-height: 1;
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    &_menu {
+      display: none;
+      margin-left: auto;
+      margin-bottom: 150px;
+      @media (max-width: 991px) {
+        display: flex;
+      }
+    }
+  }
+}
+
+.nav {
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
+  }
+
+  &__link {
+    font-size: 16px;
+    line-height: 1;
+    color: #ffffff;
+    font-weight: 400;
+    transition: color .2s ease-in-out;
+    @media (any-hover: hover) {
+    &:hover {
+      color: #f32727;
+    }
+    }
+    &:active {
+      color: #f32727;
+     transition-duration: .1s;
+    }
+    @media (max-width: 991px) {
+      font-size: 22px;
+    }
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  @include adaptive ("width", 55, 35, 0);
+  @include adaptive ("height", 26, 19, 0);
+  background-color: transparent;
+  @media (max-width: 991px) {
+    display: block;
+  }
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+  }
+}
+
+.menu-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}

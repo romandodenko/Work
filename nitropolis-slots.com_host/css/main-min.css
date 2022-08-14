@@ -1,0 +1,356 @@
+/* normalize */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* normalize */
+
+/* fonts */
+@font-face {
+  font-family: "raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local("Raleway-Bold"), url("../fonts/Raleway-Bold.woff2") format("woff2"), url("../fonts/Raleway-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Raleway-Regular"), url("../fonts/Raleway-Regular.woff2") format("woff2"), url("../fonts/Raleway-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "raleway";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local("Raleway-Light"), url("../fonts/Raleway-Light.woff2") format("woff2"), url("../fonts/Raleway-Light.woff") format("woff");
+}
+/* fonts */
+
+/* overall */
+body {
+  font-family: "raleway";
+}
+
+.page {
+  min-height: 100vh !important;
+}
+
+main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: 55px;
+  height: 26px;
+  background-color: transparent;
+}
+@media (max-width: 991px) {
+  .burger {
+    display: block;
+  }
+}
+@media (max-width: 600px) {
+  .burger {
+    width: 32px;
+    height: 22px;
+  }
+}
+.burger__line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.burger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+}
+.burger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.navbar {
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -o-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+@media (max-width: 991px) {
+  .navbar {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    z-index: 100;
+  }
+}
+
+.navbar-active {
+  background-color: #f8f9fa;
+}
+
+@media (any-hover: hover) {
+  .nav-link:hover {
+    color: #ff4500 !important;
+  }
+}
+.nav-link:active {
+  color: #ff4500 !important;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+.no-webp .hero {
+  background-image: url(../img/hero.jpg); }
+
+.hero {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+.hero__content {
+  min-height: 700px;
+  z-index: 2;
+}
+@media (max-width: 991px) {
+  .hero__content {
+    min-height: 600px;
+  }
+}
+@media (max-width: 600px) {
+  .hero__content {
+    min-height: 400px;
+  }
+}
+@media (any-hover: hover) {
+  .hero__link:hover {
+    color: #ff4500 !important;
+  }
+}
+.hero__link:active {
+  color: #ff4500 !important;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+.about__image {
+  height: 343px;
+}
+.about__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+
+.benefits__item {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.games__image {
+  height: 350px;
+}
+.games__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  -o-transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+@media (max-width: 991px) {
+  .games__image {
+    height: 300px;
+  }
+}
+@media (max-width: 600px) {
+  .games__image {
+    height: 250px;
+  }
+}
+@media (any-hover: hover) {
+  .games__image:hover img {
+    -webkit-transform: scale(1.04);
+    -ms-transform: scale(1.04);
+    transform: scale(1.04);
+  }
+}
+.games__image:active img {
+  -webkit-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  transform: scale(1.04);
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+@media (any-hover: hover) {
+  .footer__link:hover {
+    color: #ff4500 !important;
+  }
+}
+.footer__link:active {
+  color: #ff4500 !important;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+.game__content {
+  height: 700px;
+}
+@media (max-width: 768px) {
+  .game__content {
+    height: 350px;
+  }
+}
+
+.popup {
+  z-index: 300;
+}
+.popup__back {
+  z-index: 1;
+}
+.popup__body {
+  z-index: 2;
+}
+.popup label {
+  top: 0;
+  left: -5000px;
+}
+
+@media (any-hover: hover) {
+  .popup__button:hover {
+    color: #ff4500 !important;
+  }
+}
+.popup__button:active {
+  color: #ff4500 !important;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.webp .hero { background-image: url(../img/hero.webp); }
+/* overall */

@@ -1,0 +1,157 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --hover: #7B68EE;
+  --active: #4169E1;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: 991px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
+}
+
+body {
+  background-color: #140703;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: 'jejugothic';
+  min-height: 100%;
+  overflow: hidden;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.pp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  height: 100vh;
+}
+
+.pp__close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .9);
+  z-index: 1;
+}
+
+.pp__body {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 548px;
+  background: #140703;
+  z-index: 2;
+  padding: 45px 25px;
+
+  @media (max-width: 600px) {
+    width: 95%;
+    padding: 15px 10px;
+  }
+}
+
+.pp__form {
+  width: 100%;
+}
+
+.pp__form input {
+  position: absolute;
+  top: 0;
+  left: -5000px;
+}
+
+.pp__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  text-align: center;
+  letter-spacing: -0.025em;
+  @media (max-width: 991px) {
+    font-size: 19px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 15px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+
+    @media (max-width: 991px) {
+      margin-bottom: 25px;
+    }
+
+    @media (max-width: 600px) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.pp__form-bottom {
+  text-align: center;
+}
+
+.pp__button {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 29px;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  background-color: transparent;
+  padding: 16px 36px;
+  border: 3px solid #FFFFFF;
+  background-color: transparent;
+  -webkit-transition: border-color 0.2s ease-in-out, color .2s ease-in-out;
+  -o-transition: border-color 0.2s ease-in-out, color .2s ease-in-out;
+  transition: border-color 0.2s ease-in-out, color .2s ease-in-out;
+
+  @media (max-width: 991px) {
+    font-size: 19px;
+    padding: 10px 40px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+    padding: 10px 30px;
+  }
+}
+
+@media (any-hover: hover) {
+  .pp__button:hover {
+    border-color: #ED9D02;
+    color: #ED9D02;
+  }
+}
+
+.pp__button:active {
+  border-color: #ED9D02;
+  color: #ED9D02;
+  transition-duration: .1s;
+}

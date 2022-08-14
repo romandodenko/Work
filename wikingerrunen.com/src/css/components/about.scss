@@ -1,0 +1,119 @@
+.about {
+  margin-bottom: 100px;
+
+  @media (max-width: 991px) {
+    margin-bottom: 70px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 40px;
+  }
+
+  &__container {
+    @media (any-hover: hover) {
+      &:hover {
+        & .about__title {
+          &::after {
+            width: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+
+    @media (max-width: 991px) {
+      font-size: 27px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 21px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+
+      @media (max-width: 991px) {
+        margin-bottom: 45px;
+      }
+
+      @media (max-width: 600px) {
+        margin-bottom: 25px;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 2px;
+      left: 50%;
+      bottom: 0;
+      background-color: #ffffff;
+      transform: translateX(-50%);
+      transition: width .3s ease-in-out;
+
+      @media (max-width: 750px) {
+        width: 100px;
+      }
+    }
+  }
+
+  &__body { 
+    padding: 45px 30px;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, .3);
+    transition: border-radius .3s ease-in-out;
+
+    @media (max-width: 991px) {
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 600px) {
+      padding: 20px 15px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-align: center;
+
+    @media (max-width: 991px) {
+      font-size: 21px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+
+      @media (max-width: 991px) {
+        margin-bottom: 45px;
+      }
+
+      @media (max-width: 600px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,246 @@
+.hero {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 100px;
+
+  @media (max-width: 991px) {
+    margin-bottom: 70px;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 40px;
+  }
+
+  &__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    min-height: 800px;
+
+    @media (max-width: 991px) {
+      min-height: 600px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        & .hero__left {
+          transform: rotate(95deg);
+        }
+
+        & .hero__right {
+          transform: rotate(-95deg);
+        }
+      }
+    }
+  }
+
+  &__left {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    z-index: 1;
+    align-self: flex-end;
+    transition: transform .5s ease-in-out;
+
+    @media (max-width: 1150px) {
+      width: 250px;
+      height: 250px;
+    }
+
+    @media (max-width: 600px) {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  &__circle {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #661ba0;
+
+    @media (max-width: 1150px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    @media (max-width: 600px) {
+      width: 60px;
+      height: 60px;
+    }
+
+    @media (max-width: 600px) {}
+
+    &_1 {
+      top: 0;
+      left: 0;
+    }
+
+    &_2 {
+      bottom: 0;
+      left: 0;
+    }
+
+    &_3 {
+      bottom: 0;
+      right: 0;
+    }
+
+    &_4 {
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__body {
+    position: relative;
+    z-index: 3;
+    padding: 45px 30px;
+    background-color: rgba(0, 0, 0, .3);
+    flex: 0 0 685px;
+    border-radius: 25px;
+    transition: border-radius .3s ease-in-out;
+    @media (max-width: 991px) {
+      padding: 30px 20px;
+    }
+    @media (max-width: 750px) {
+      background-color: rgba(0, 0, 0, .6);
+      flex: 0 1 100%;
+    }
+
+    @media (max-width: 600px) {
+      padding: 20px 15px;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+
+    & span {
+      color: #661ba0;
+    }
+
+    @media (max-width: 991px) {
+      font-size: 32px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+
+      @media (max-width: 991px) {
+        margin-bottom: 45px;
+      }
+
+      @media (max-width: 600px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #ffffff;
+    text-align: center;
+
+    @media (max-width: 991px) {
+      font-size: 21px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+
+      @media (max-width: 991px) {
+        margin-bottom: 45px;
+      }
+
+      @media (max-width: 600px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__link {
+    text-align: center;
+
+    & a {
+      display: inline-block;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.2;
+      color: #ffffff;
+      padding: 15px 65px;
+      border-radius: 25px;
+      background-color: #661ba0;
+      transition: border-radius .2s ease-in-out;
+
+      @media (max-width: 991px) {
+        font-size: 20px;
+        padding: 13px 45px;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 16px;
+        padding: 10px 45px;
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          border-radius: 0;
+        }
+      }
+
+      &:active {
+        border-radius: 0;
+        transition-duration: .1s;
+      }
+    }
+
+  }
+
+  &__right {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    align-self: flex-start;
+    z-index: 1;
+    transition: transform .5s ease-in-out;
+
+    @media (max-width: 1150px) {
+      width: 250px;
+      height: 250px;
+    }
+
+    @media (max-width: 600px) {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

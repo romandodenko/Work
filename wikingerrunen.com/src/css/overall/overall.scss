@@ -1,0 +1,157 @@
+.container {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media (max-width: 991px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
+}
+
+body {
+  background-color: #050D2B;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: 'opensans';
+  min-height: 100%;
+  overflow: hidden;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  transition: opacity .2s ease-in-out, visibility .2s ease-in-out, pointer-events .2s ease-in-out;
+  height: 100vh;
+}
+
+.popup__close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .9);
+  z-index: 1;
+}
+
+.popup__body {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 540px;
+  background: #cacaca;
+  border-radius: 5px;
+  z-index: 2;
+  padding: 30px 15px;
+
+  @media (max-width: 600px) {
+    width: 95%;
+    padding: 15px 10px;
+  }
+}
+
+.popup__form {
+  width: 100%;
+}
+
+.popup__form input {
+  position: absolute;
+  top: 0;
+  left: -5000px;
+}
+
+.popup__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.3;
+  text-align: center;
+  letter-spacing: -0.025em;
+  color: #661ba0;
+  margin-bottom: 20px;
+
+  @media (max-width: 991px) {
+    font-size: 19px;
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+}
+
+.popup__form-bottom {
+  text-align: center;
+}
+
+.popup__form-icon {
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  @media (max-width: 991px) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (max-width: 600px) {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.popup__button {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #ffffff;
+  padding: 15px 65px;
+  border-radius: 25px;
+  background-color: #661ba0;
+  transition: border-radius .2s ease-in-out;
+
+  @media (max-width: 991px) {
+    font-size: 20px;
+    padding: 13px 45px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+    padding: 10px 45px;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      border-radius: 0;
+    }
+  }
+
+  &:active {
+    border-radius: 0;
+    transition-duration: .1s;
+  }
+}
